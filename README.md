@@ -1,22 +1,38 @@
-# MathBank – English Web Version
+# Math Question Bank
 
-This repository is the GitHub Pages / web-ready adaptation of the supplied MathBank package.
+This repository is the **GitHub Pages / static-web version** of the MathBank Question Bank workflow.
 
-## What is included
-- English MathBank web interface
-- Question bank browsing and filtering UI
-- Question editor / add / edit / delete demo
-- Statistics and settings UI
-- Theme and dark-mode controls
-- Paper workspace UI retained for future use
-- Responsive layout for desktop and mobile
-- Original-style JavaScript modules consolidated into `static/js/mathbank.js` where applicable
+## Included in this web build
 
-## What was removed from the web deployment
-- Bundled Windows Python runtime and DLLs
-- Windows batch launcher
-- Local-only upload/runtime folders
-- Local copies of large third-party libraries when a CDN version is suitable
+- Responsive desktop / tablet / mobile layout
+- Login and student self-registration
+- Admin and Student roles
+- Question ID, marks, chapter, source, source year, tags
+- Easy / Medium / Hard difficulty
+- Active / Archived status
+- Public / Private visibility
+- Add, edit, delete, preview
+- Delete confirmation and duplicate Question ID validation
+- LaTeX math input and KaTeX rendering
+- Search and filter: Chapter → Difficulty → Source
+- Favorites for Admin and Student
+- Random question selection
+- Dashboard and statistics without charts
+- Student dashboard
+- English UI
+- Browser persistence with `localStorage`
 
-## Important
-GitHub Pages can serve the frontend, but it cannot execute the original Python/FastAPI backend. Features that depend on `/api/*` (database, OCR, AI, PDF/Word export, etc.) require a separate backend deployment. The current web version therefore provides the English frontend and a browser-based demo for the core question-bank interaction.
+## Intentionally excluded from the GitHub Pages build
+
+The original desktop package contains Python/FastAPI server code, a bundled Windows Python runtime, OCR services, AI providers, PDF/Word export, and paper-generation workflows. Those are not part of this static website because GitHub Pages cannot execute the desktop/backend runtime. Practice/Paper/AI/OCR features are also postponed according to the current project scope.
+
+## Run
+
+Open `index.html` through GitHub Pages. The root page redirects to `static/index.html`.
+
+Demo admin account:
+
+- Email: `admin@mathbank.local`
+- Password: `admin123`
+
+> This is a frontend-only V1. Authentication and question data are stored locally in the browser. Supabase/backend integration should be added later for real multi-user production use.

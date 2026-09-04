@@ -1,83 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathBank | Mathematics Question Bank</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = { theme: { extend: { colors: { brand: {
-        50:'rgba(var(--brand-50-rgb), <alpha-value>)', 100:'rgba(var(--brand-100-rgb), <alpha-value>)',
-        200:'rgba(var(--brand-200-rgb), <alpha-value>)', 500:'rgba(var(--brand-500-rgb), <alpha-value>)',
-        600:'rgba(var(--brand-600-rgb), <alpha-value>)', 700:'rgba(var(--brand-700-rgb), <alpha-value>)',
-        900:'rgba(var(--brand-900-rgb), <alpha-value>)' }}, fontFamily: { sans: ['Inter','Outfit','system-ui','sans-serif'] } } } };
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked@16.3.0/lib/marked.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
-    <link rel="stylesheet" href="css/app.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Question Bank</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/app.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
+<script defer src="js/mathbank.js"></script>
 </head>
-<body class="h-screen overflow-hidden text-slate-800 font-sans antialiased flex flex-col">
-    <!-- Original MathBank web UI, translated to English. Backend-dependent actions require a deployed API. -->
-    <header class="glass-panel sticky top-0 z-40 w-full h-16 flex items-center justify-between px-6">
-        <div class="flex items-center space-x-3">
-            <div class="h-10 w-10 rounded-xl overflow-hidden shadow-sm shrink-0 flex items-center justify-center">
-                <div class="w-full h-full grid place-items-center bg-brand-600 text-white font-bold">M</div>
-            </div>
-            <div class="relative" id="workspaceDropdownContainer">
-                <button onclick="toggleWorkspaceDropdown(event)" id="workspaceDropdownBtn" class="group cursor-pointer rounded-xl px-2 py-1 -mx-2 hover:bg-slate-200/50 active:scale-95 transition-all" title="Switch workspace">
-                    <span class="font-semibold text-lg tracking-tight brand-title block">MathBank</span>
-                    <div class="flex items-center space-x-1 -mt-1"><span id="currentWorkspaceName" class="text-sm font-medium text-slate-700">Question Bank Workspace</span><i class="fa-solid fa-chevron-down text-[9px] text-slate-400" id="workspaceDropdownArrow"></i></div>
-                </button>
-                <div id="workspaceDropdownMenu" class="glass-dropdown absolute left-0 mt-2 w-52 py-1.5 rounded-2xl border border-slate-200/70 bg-white/95 backdrop-blur-xl shadow-xl transition-all scale-90 opacity-0 pointer-events-none origin-top-left z-50">
-                    <button onclick="selectWorkspace('bank', 'Question Bank Workspace')" class="glass-dropdown-item w-full px-3.5 py-2.5 text-xs text-left flex items-center justify-between font-medium rounded-xl" id="ws-btn-bank"><span>Question Bank Workspace</span><i class="fa-solid fa-check text-[10px] text-brand-600" id="ws-check-bank"></i></button>
-                    <button onclick="selectWorkspace('paper', 'Paper Workspace')" class="glass-dropdown-item w-full px-3.5 py-2.5 text-xs text-left flex items-center justify-between rounded-xl" id="ws-btn-paper"><span>Paper Workspace</span><i class="fa-solid fa-check text-[10px] text-brand-600 hidden" id="ws-check-paper"></i></button>
-                </div>
-            </div>
-            <button onclick="toggleSidebarCollapse()" id="toggleSidebarBtn" class="ml-2 p-2 rounded-xl text-slate-500 hover:text-brand-600 hover:bg-slate-100/60 active:scale-95 transition-all focus:outline-none border border-slate-200/50" title="Collapse question bank sidebar"><i class="fa-solid fa-angles-left text-xs transition-transform duration-200" id="toggleSidebarIcon"></i></button>
-        </div>
-        <div class="flex items-center space-x-4">
-            <div id="apiStatusIndicator" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600"><span class="h-2 w-2 rounded-full bg-slate-400"></span><span>Checking configuration...</span></div>
-            <button onclick="openStatsModal()" class="glass-btn flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold text-brand-600"><i class="fa-solid fa-chart-pie"></i><span>Statistics</span></button>
-            <button onclick="openSettingsModal()" class="glass-btn relative flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-medium text-slate-600"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
-            <button onclick="confirmShutdown()" class="glass-btn-danger flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold" title="Close the local MathBank backend safely"><i class="fa-solid fa-power-off"></i><span>Close MathBank</span></button>
-        </div>
-    </header>
+<body>
+<div id="app">
+  <header class="topbar">
+    <a class="brand" href="#dashboard" aria-label="Math Question Bank home"><span class="brand-mark">∑</span><span>Math Question Bank</span></a>
+    <nav class="topnav">
+      <button data-nav="dashboard" class="nav-btn">Dashboard</button>
+      <button data-nav="questions" class="nav-btn">Question Bank</button>
+      <button data-nav="favorites" class="nav-btn">Favorites</button>
+      <button id="adminNav" data-nav="admin" class="nav-btn hidden">Admin</button>
+    </nav>
+    <div class="top-actions">
+      <button id="themeBtn" class="icon-btn" title="Toggle theme">◐</button>
+      <button id="accountBtn" class="account-btn"><span id="accountName">Guest</span></button>
+      <button id="logoutBtn" class="ghost-btn hidden">Log out</button>
+    </div>
+  </header>
 
-    <main class="flex-1 flex overflow-hidden h-[calc(100vh-4rem)]">
-        <div id="bankWorkspaceSection" class="w-full h-full flex overflow-hidden">
-            <section id="sidebarSection" class="glass-sidebar flex flex-col h-full shrink-0 overflow-hidden" style="width: 320px; min-width: 0px;">
-                <div id="sidebarTopPanel" class="flex flex-col shrink-0 overflow-y-auto overflow-x-hidden custom-scrollbar">
-                    <div class="p-3 border-b border-slate-100 space-y-2">
-                        <div class="relative mx-2"><span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i></span><input type="text" id="searchInput" placeholder="Search questions..." class="glass-input w-full pl-8 pr-4 py-1.5 text-xs rounded-xl"></div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <select id="filterType" class="glass-select text-xs px-2.5 py-2.5 rounded-xl"><option value="">All Question Types</option><option value="single_choice">Single Choice</option><option value="multi_choice">Multiple Choice</option><option value="fill_in_blank">Fill in the Blank</option><option value="detailed_answer">Structured / Detailed Answer</option></select>
-                            <select id="filterDifficulty" class="glass-select text-xs px-2.5 py-2.5 rounded-xl"><option value="">All Difficulties</option><option value="easy">Easy</option><option value="normal">Normal</option><option value="challenge">Challenge</option><option value="advanced">Advanced</option></select>
-                        </div>
-                    </div>
-                    <div class="p-3"><div class="flex items-center justify-between mb-2"><span class="text-[11px] font-semibold text-slate-500">Questions</span><button onclick="openEditor()" class="glass-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-brand-600"><i class="fa-solid fa-plus mr-1"></i>Add Question</button></div><div id="questionList" class="space-y-1"></div></div>
-                </div>
-            </section>
-            <section class="flex-1 min-w-0 flex flex-col bg-white/50">
-                <div class="flex-1 overflow-auto p-6 custom-scrollbar">
-                    <div id="editorEmptyState" class="h-full grid place-items-center text-center text-slate-400"><div><i class="fa-solid fa-calculator text-5xl mb-4 opacity-30"></i><h2 class="text-lg font-semibold text-slate-600">Select a question to begin</h2><p class="text-sm mt-1">Browse the question bank or create a new question.</p></div></div>
-                    <div id="editorContainer" class="hidden"></div>
-                </div>
-            </section>
-        </div>
-        <div id="paperWorkspaceSection" class="hidden w-full h-full"></div>
-    </main>
+  <main class="page-shell">
+    <section id="loginView" class="auth-card view hidden">
+      <div class="auth-copy"><span class="eyebrow">QUESTION BANK</span><h1>Learn, search, and manage mathematics questions.</h1><p>A lightweight web version designed to run directly from GitHub Pages. Data is stored in your browser for this V1.</p></div>
+      <div class="auth-panel">
+        <div class="tabs"><button id="loginTab" class="tab active">Log in</button><button id="registerTab" class="tab">Register</button></div>
+        <form id="authForm" class="form-grid">
+          <label>Email<input id="authEmail" type="email" required placeholder="student@example.com"></label>
+          <label>Password<input id="authPassword" type="password" required minlength="6" placeholder="••••••••"></label>
+          <label id="roleWrap" class="hidden">Role<select id="authRole"><option value="student">Student</option><option value="admin">Admin</option></select></label>
+          <button class="primary-btn" type="submit" id="authSubmit">Log in</button>
+          <p class="muted small" id="authHint">Demo admin: admin@mathbank.local / admin123</p>
+          <p class="error" id="authError"></p>
+        </form>
+      </div>
+    </section>
 
-    <!-- Lightweight modal containers retained for the original modules. -->
-    <div id="statsModal" class="hidden"></div><div id="settingsModal" class="hidden"></div>
-    <script src="js/api.js?v=1.0.1"></script>
-    <script src="js/editor.js?v=1.0.1"></script>
-    <script src="js/ocr.js?v=1.0.1"></script>
-    <script src="js/import.js?v=1.0.1"></script>
-    <script src="js/paper.js?v=1.0.1"></script>
+    <section id="dashboardView" class="view hidden">
+      <div class="page-heading"><div><span class="eyebrow">OVERVIEW</span><h1 id="welcomeTitle">Dashboard</h1><p>Your question-bank workspace.</p></div><button id="randomBtn" class="primary-btn">Random Question</button></div>
+      <div class="stat-grid" id="statGrid"></div>
+      <div class="content-grid">
+        <article class="panel"><div class="panel-head"><h2>Recent questions</h2><button data-nav="questions" class="text-btn">View all</button></div><div id="recentList" class="question-mini-list"></div></article>
+        <article class="panel"><div class="panel-head"><h2>Your favorites</h2><button data-nav="favorites" class="text-btn">View all</button></div><div id="favoriteList" class="question-mini-list"></div></article>
+      </div>
+    </section>
+
+    <section id="questionsView" class="view hidden">
+      <div class="page-heading"><div><span class="eyebrow">QUESTION BANK</span><h1>Questions</h1><p>Filter by chapter, difficulty, and source.</p></div><button id="addQuestionBtn" class="primary-btn admin-only hidden">+ Add Question</button></div>
+      <div class="toolbar panel">
+        <div class="search-box">⌕<input id="searchInput" placeholder="Search question ID, text, tags, or source..."></div>
+        <select id="chapterFilter"><option value="">All Chapters</option></select>
+        <select id="difficultyFilter"><option value="">All Difficulties</option><option>Easy</option><option>Medium</option><option>Hard</option></select>
+        <select id="sourceFilter"><option value="">All Sources</option></select>
+        <select id="statusFilter"><option value="active">Active</option><option value="archived">Archived</option><option value="all">All Status</option></select>
+      </div>
+      <div id="questionList" class="question-list"></div>
+      <div id="emptyState" class="empty-state hidden"><div class="empty-icon">∅</div><h3>No questions found</h3><p>Adjust your filters or add a new question.</p></div>
+    </section>
+
+    <section id="favoritesView" class="view hidden"><div class="page-heading"><div><span class="eyebrow">SAVED</span><h1>Favorites</h1><p>Your saved questions.</p></div></div><div id="favoritesList" class="question-list"></div></section>
+
+    <section id="adminView" class="view hidden">
+      <div class="page-heading"><div><span class="eyebrow">ADMIN</span><h1>Admin Console</h1><p>Manage question-bank content and review system statistics.</p></div></div>
+      <div class="stat-grid" id="adminStatGrid"></div>
+      <div class="panel admin-note"><h2>Current web build</h2><p>Static GitHub Pages build. Authentication and question data are stored in <code>localStorage</code>. Backend-only features from the desktop package such as Python/FastAPI, OCR, AI providers, PDF/Word export, and paper generation are intentionally excluded from this website build.</p></div>
+    </section>
+  </main>
+
+  <div id="questionModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card modal-wide">
+      <div class="modal-head"><div><span class="eyebrow" id="modalEyebrow">QUESTION</span><h2 id="modalTitle">Question</h2></div><button class="icon-btn" data-close="questionModal">×</button></div>
+      <div id="questionDetail" class="detail-body"></div>
+      <div id="studentActions" class="modal-actions hidden"><button id="favoriteDetailBtn" class="secondary-btn">☆ Favorite</button><button id="closeDetailBtn" class="primary-btn">Close</button></div>
+      <form id="questionForm" class="form-grid hidden">
+        <div class="field-row"><label>Question ID<input id="fId" required placeholder="F4-1-001"></label><label>Marks<input id="fMarks" required type="number" min="1" value="5"></label></div>
+        <div class="field-row"><label>Chapter<input id="fChapter" required placeholder="Chapter 1 Functions"></label><label>Difficulty<select id="fDifficulty"><option>Easy</option><option selected>Medium</option><option>Hard</option></select></label></div>
+        <div class="field-row"><label>Source<input id="fSource" required placeholder="SPM"></label><label>Source Year<input id="fYear" type="number" min="1900" max="2100" placeholder="2025"></label></div>
+        <label>Tags<input id="fTags" placeholder="functions, composite functions"></label>
+        <label>Question / Working Prompt<textarea id="fQuestion" required rows="7" placeholder="Use $...$ or $$...$$ for mathematics."></textarea></label>
+        <label>Answer<textarea id="fAnswer" required rows="4" placeholder="Structured final answer"></textarea></label>
+        <label>Full Solution / Working<textarea id="fSolution" required rows="8" placeholder="Detailed solution steps"></textarea></label>
+        <div class="field-row"><label>Visibility<select id="fVisibility"><option>Public</option><option>Private</option></select></label><label>Status<select id="fStatus"><option>Active</option><option>Archived</option></select></label></div>
+        <div class="modal-actions"><button type="button" class="secondary-btn" data-close="questionModal">Cancel</button><button type="submit" class="primary-btn">Save Question</button></div>
+        <p class="error" id="formError"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="accountModal" class="modal hidden"><div class="modal-card small-modal"><div class="modal-head"><h2>Account</h2><button class="icon-btn" data-close="accountModal">×</button></div><div id="accountBody"></div></div></div>
+  <div id="toast" class="toast" aria-live="polite"></div>
+</div>
 </body>
 </html>
