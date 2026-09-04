@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathBank | Mathematics Question Bank</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { colors: { brand: {
+        50:'rgba(var(--brand-50-rgb), <alpha-value>)', 100:'rgba(var(--brand-100-rgb), <alpha-value>)',
+        200:'rgba(var(--brand-200-rgb), <alpha-value>)', 500:'rgba(var(--brand-500-rgb), <alpha-value>)',
+        600:'rgba(var(--brand-600-rgb), <alpha-value>)', 700:'rgba(var(--brand-700-rgb), <alpha-value>)',
+        900:'rgba(var(--brand-900-rgb), <alpha-value>)' }}, fontFamily: { sans: ['Inter','Outfit','system-ui','sans-serif'] } } } };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@16.3.0/lib/marked.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="h-screen overflow-hidden text-slate-800 font-sans antialiased flex flex-col">
+    <!-- Original MathBank web UI, translated to English. Backend-dependent actions require a deployed API. -->
+    <header class="glass-panel sticky top-0 z-40 w-full h-16 flex items-center justify-between px-6">
+        <div class="flex items-center space-x-3">
+            <div class="h-10 w-10 rounded-xl overflow-hidden shadow-sm shrink-0 flex items-center justify-center">
+                <div class="w-full h-full grid place-items-center bg-brand-600 text-white font-bold">M</div>
+            </div>
+            <div class="relative" id="workspaceDropdownContainer">
+                <button onclick="toggleWorkspaceDropdown(event)" id="workspaceDropdownBtn" class="group cursor-pointer rounded-xl px-2 py-1 -mx-2 hover:bg-slate-200/50 active:scale-95 transition-all" title="Switch workspace">
+                    <span class="font-semibold text-lg tracking-tight brand-title block">MathBank</span>
+                    <div class="flex items-center space-x-1 -mt-1"><span id="currentWorkspaceName" class="text-sm font-medium text-slate-700">Question Bank Workspace</span><i class="fa-solid fa-chevron-down text-[9px] text-slate-400" id="workspaceDropdownArrow"></i></div>
+                </button>
+                <div id="workspaceDropdownMenu" class="glass-dropdown absolute left-0 mt-2 w-52 py-1.5 rounded-2xl border border-slate-200/70 bg-white/95 backdrop-blur-xl shadow-xl transition-all scale-90 opacity-0 pointer-events-none origin-top-left z-50">
+                    <button onclick="selectWorkspace('bank', 'Question Bank Workspace')" class="glass-dropdown-item w-full px-3.5 py-2.5 text-xs text-left flex items-center justify-between font-medium rounded-xl" id="ws-btn-bank"><span>Question Bank Workspace</span><i class="fa-solid fa-check text-[10px] text-brand-600" id="ws-check-bank"></i></button>
+                    <button onclick="selectWorkspace('paper', 'Paper Workspace')" class="glass-dropdown-item w-full px-3.5 py-2.5 text-xs text-left flex items-center justify-between rounded-xl" id="ws-btn-paper"><span>Paper Workspace</span><i class="fa-solid fa-check text-[10px] text-brand-600 hidden" id="ws-check-paper"></i></button>
+                </div>
+            </div>
+            <button onclick="toggleSidebarCollapse()" id="toggleSidebarBtn" class="ml-2 p-2 rounded-xl text-slate-500 hover:text-brand-600 hover:bg-slate-100/60 active:scale-95 transition-all focus:outline-none border border-slate-200/50" title="Collapse question bank sidebar"><i class="fa-solid fa-angles-left text-xs transition-transform duration-200" id="toggleSidebarIcon"></i></button>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div id="apiStatusIndicator" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600"><span class="h-2 w-2 rounded-full bg-slate-400"></span><span>Checking configuration...</span></div>
+            <button onclick="openStatsModal()" class="glass-btn flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold text-brand-600"><i class="fa-solid fa-chart-pie"></i><span>Statistics</span></button>
+            <button onclick="openSettingsModal()" class="glass-btn relative flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-medium text-slate-600"><i class="fa-solid fa-gear"></i><span>Settings</span></button>
+            <button onclick="confirmShutdown()" class="glass-btn-danger flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold" title="Close the local MathBank backend safely"><i class="fa-solid fa-power-off"></i><span>Close MathBank</span></button>
+        </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden h-[calc(100vh-4rem)]">
+        <div id="bankWorkspaceSection" class="w-full h-full flex overflow-hidden">
+            <section id="sidebarSection" class="glass-sidebar flex flex-col h-full shrink-0 overflow-hidden" style="width: 320px; min-width: 0px;">
+                <div id="sidebarTopPanel" class="flex flex-col shrink-0 overflow-y-auto overflow-x-hidden custom-scrollbar">
+                    <div class="p-3 border-b border-slate-100 space-y-2">
+                        <div class="relative mx-2"><span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i></span><input type="text" id="searchInput" placeholder="Search questions..." class="glass-input w-full pl-8 pr-4 py-1.5 text-xs rounded-xl"></div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="filterType" class="glass-select text-xs px-2.5 py-2.5 rounded-xl"><option value="">All Question Types</option><option value="single_choice">Single Choice</option><option value="multi_choice">Multiple Choice</option><option value="fill_in_blank">Fill in the Blank</option><option value="detailed_answer">Structured / Detailed Answer</option></select>
+                            <select id="filterDifficulty" class="glass-select text-xs px-2.5 py-2.5 rounded-xl"><option value="">All Difficulties</option><option value="easy">Easy</option><option value="normal">Normal</option><option value="challenge">Challenge</option><option value="advanced">Advanced</option></select>
+                        </div>
+                    </div>
+                    <div class="p-3"><div class="flex items-center justify-between mb-2"><span class="text-[11px] font-semibold text-slate-500">Questions</span><button onclick="openEditor()" class="glass-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-brand-600"><i class="fa-solid fa-plus mr-1"></i>Add Question</button></div><div id="questionList" class="space-y-1"></div></div>
+                </div>
+            </section>
+            <section class="flex-1 min-w-0 flex flex-col bg-white/50">
+                <div class="flex-1 overflow-auto p-6 custom-scrollbar">
+                    <div id="editorEmptyState" class="h-full grid place-items-center text-center text-slate-400"><div><i class="fa-solid fa-calculator text-5xl mb-4 opacity-30"></i><h2 class="text-lg font-semibold text-slate-600">Select a question to begin</h2><p class="text-sm mt-1">Browse the question bank or create a new question.</p></div></div>
+                    <div id="editorContainer" class="hidden"></div>
+                </div>
+            </section>
+        </div>
+        <div id="paperWorkspaceSection" class="hidden w-full h-full"></div>
+    </main>
+
+    <!-- Lightweight modal containers retained for the original modules. -->
+    <div id="statsModal" class="hidden"></div><div id="settingsModal" class="hidden"></div>
+    <script src="js/api.js?v=1.0.1"></script>
+    <script src="js/editor.js?v=1.0.1"></script>
+    <script src="js/ocr.js?v=1.0.1"></script>
+    <script src="js/import.js?v=1.0.1"></script>
+    <script src="js/paper.js?v=1.0.1"></script>
+</body>
+</html>
