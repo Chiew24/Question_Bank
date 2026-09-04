@@ -13,76 +13,52 @@
 </head>
 <body>
 <div id="app">
-  <aside class="sidebar">
-    <a class="brand" href="#dashboard"><span class="brand-symbol"><i></i><i></i><i></i></span><span><b>SAM</b> EduGPT</span></a>
-    <div class="profile-card">
-      <div class="avatar">◯</div><div class="profile-name" id="sidebarName">CHIEW MU SHEN</div><div class="profile-role">Student</div>
-      <button class="settings-btn" id="accountBtn" aria-label="Account settings">⚙</button>
-    </div>
-    <div class="nav-label">MENU</div>
-    <button class="side-link active" data-nav="dashboard"><span>▦</span>Dashboard</button>
-    <div class="nav-label">CURRICULUM</div>
-    <button class="side-link syllabus" data-nav="questions"><span>▥</span>Syllabuses</button>
-    <button class="side-link child-link" data-nav="questions"><span>▢</span><em>(9758) H2 Mathematics</em><b>⌄</b></button>
-    <button class="side-link child-link" data-nav="questions"><span>▢</span><em>(4052) Mathematics</em><b>⌄</b></button>
-    <div class="nav-label">HISTORY</div>
-    <button class="side-link" data-nav="favorites"><span>◔</span>My Questions</button>
-    <div class="nav-label">ROADMAP</div>
-    <button class="side-link"><span>◉</span>Roadmap</button>
-    <button class="side-link"><span>◯</span>Feedback</button>
-    <div class="nav-label account-label">ACCOUNT</div>
-    <button class="side-link billing"><span>▤</span>Billing <small>Upgrade</small></button>
-  </aside>
+<aside class="sidebar">
+<a class="brand" href="#dashboard"><span class="brand-symbol"><i></i><i></i><i></i></span><span><b>SAM</b> EduGPT</span></a>
+<div class="profile-card"><div class="avatar">◯</div><div class="profile-name">CHIEW MU SHEN</div><div class="profile-role">Student</div><button class="settings-btn" id="accountBtn">⚙</button></div>
+<div class="nav-label">MENU</div>
+<button class="side-link" data-nav="dashboard"><span>▦</span>Dashboard</button>
+<div class="nav-label">CURRICULUM</div>
+<button class="side-link syllabus"><span>▥</span>Syllabuses</button>
+<div class="subject-menu">
+<button class="side-link child-link"><span>▢</span><em>(9758) H2 Mathematics</em><b>⌃</b></button>
+<button class="side-link nested-link" data-nav="questions"><span></span>Topics</button>
+<button class="side-link nested-link selected" data-nav="questions"><span></span>Questions</button>
+<button class="side-link nested-link"><span></span>Playground <small class="test-badge">Test</small></button>
+<button class="side-link nested-link"><span></span>Course Info</button>
+</div>
+<div class="nav-label">HISTORY</div>
+<button class="side-link" data-nav="favorites"><span>◔</span>My Questions</button>
+<div class="nav-label">ROADMAP</div>
+<button class="side-link"><span>◉</span>Roadmap</button>
+<button class="side-link"><span>◯</span>Feedback</button>
+<div class="nav-label account-label">ACCOUNT</div>
+<button class="side-link billing"><span>▤</span>Billing <small>Upgrade</small></button>
+</aside>
 
-  <main class="main-area">
-    <header class="topbar">
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle sidebar">☰</button><div class="top-spacer"></div>
-      <div class="usage-pill">Token usage <strong>0 / 20k</strong><i><b></b></i></div>
-      <div class="usage-pill">Solution usage <strong>0 / 3</strong><i><b></b></i></div>
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">☾</button><span class="top-divider"></span>
-      <div class="top-avatar">◯</div><span class="top-name" id="topName">CHIEW MU SHEN</span><span class="top-chevron">⌄</span>
-    </header>
+<main class="main-area">
+<header class="topbar"><button class="menu-btn" id="menuBtn">☰</button><div class="top-spacer"></div><div class="usage-pill">Token usage <strong>0 / 20k</strong><i><b></b></i></div><div class="usage-pill">Solution usage <strong>0 / 3</strong><i><b></b></i></div><button class="theme-btn" id="themeBtn">☾</button><span class="top-divider"></span><div class="top-avatar">◯</div><span class="top-name">CHIEW MU SHEN</span><span class="top-chevron">⌄</span></header>
 
-    <section id="dashboardView" class="dashboard view">
-      <div class="hero-card">
-        <div class="eyebrow">SAM EDUGPT</div>
-        <h1>Ready to practice?<span class="typing-cursor"></span></h1>
-        <p class="hero-copy">Thousands of Singapore MOE syllabus-aligned questions, powered<br>by real-time AI guidance.</p>
-        <div class="hero-actions">
-          <button class="primary-action" id="randomBtn">◎&nbsp; Preview a question</button>
-          <button class="secondary-action" data-nav="questions">▥&nbsp; My syllabuses</button>
-        </div>
-        <div class="promo-card">
-          <div class="promo-title"><span>PRO</span><strong>Go further with Pro</strong></div>
-          <p>Unlimited AI solutions + 10× more AI usage. <strong>From S$6.58/month.</strong></p>
-          <button>View Pro plans&nbsp; →</button>
-        </div>
-        <div class="evergreen-card">
-          <strong>SAM EduGPT is an evergreen project.</strong>
-          <p>We’re constantly shipping updates—bringing you more features, expanded<br>syllabuses, and a growing library of questions—so your learning experience keeps<br>improving over time.</p>
-        </div>
-      </div>
-    </section>
+<section id="dashboardView" class="view dashboard hidden"><div class="hero-card"><div class="eyebrow">SAM EDUGPT</div><h1>Ready to practice?<span class="typing-cursor"></span></h1><p class="hero-copy">Thousands of Singapore MOE syllabus-aligned questions, powered<br>by real-time AI guidance.</p><div class="hero-actions"><button class="primary-action" id="randomBtn">◎&nbsp; Preview a question</button><button class="secondary-action" data-nav="questions">▥&nbsp; My syllabuses</button></div><div class="promo-card"><div class="promo-title"><span>PRO</span><strong>Go further with Pro</strong></div><p>Unlimited AI solutions + 10× more AI usage. <strong>From S$6.58/month.</strong></p><button>View Pro plans&nbsp; →</button></div><div class="evergreen-card"><strong>SAM EduGPT is an evergreen project.</strong><p>We’re constantly shipping updates—bringing you more features, expanded<br>syllabuses, and a growing library of questions—so your learning experience keeps<br>improving over time.</p></div></div></section>
 
-    <section id="questionsView" class="view content-view hidden">
-      <div class="page-heading"><div><span class="eyebrow">SYLLABUSES</span><h2>My syllabuses</h2><p>Browse questions from your available syllabuses.</p></div></div>
-      <div id="questionList" class="student-question-list"></div>
-    </section>
-    <section id="favoritesView" class="view content-view hidden">
-      <div class="page-heading"><div><span class="eyebrow">HISTORY</span><h2>My Questions</h2><p>Your saved questions.</p></div></div>
-      <div id="favoritesList" class="student-question-list"></div>
-    </section>
-  </main>
+<section id="questionsView" class="view content-view">
+<div class="breadcrumb"><span>SAM EduGPT</span><b>›</b><span>H2 Mathematics · JC 2</span><b>›</b><span class="muted">Practice questions</span></div>
+<div class="section-label">PRACTICE QUESTIONS</div>
+<div class="question-hero"><div class="question-hero-title">▥&nbsp; 9758 : JC 2 – H2 Mathematics</div><div class="question-hero-subtitle">Browse filtered questions.</div><button class="all-pill">All</button></div>
+<button class="back-button" data-nav="dashboard">←&nbsp; Back to syllabus</button>
+<div class="question-panel">
+<div class="status-row"><span class="status-label">Status:</span><button class="status-pill active" data-status="all">All</button><button class="status-pill" data-status="not-seen">Not seen</button><button class="status-pill" data-status="seen">Seen</button></div>
+<div class="table-toolbar"><label><select id="pageSize"><option>10</option><option>25</option><option>50</option></select><span>entries per page</span></label><label class="search-box">Search:<input id="searchInput" type="search"></label></div>
+<div class="table-wrap"><table><thead><tr><th>ID <span>↕</span></th><th>QUESTION</th><th>PAPER TYPE</th><th>SOURCE</th><th>COMPONENT</th><th>SUBJECT</th><th>LEVEL</th><th>TOPICS</th><th>SUBTOPICS</th><th>STATUS <span>↕</span></th></tr></thead><tbody id="questionRows"></tbody></table></div>
+<div class="table-footer"><span id="tableInfo"></span><div class="pagination" id="pagination"></div></div>
+</div>
+</section>
 
-  <div id="questionModal" class="modal hidden"><div class="modal-card">
-    <div class="modal-head"><div><span class="eyebrow">QUESTION</span><h2 id="modalTitle">Question</h2></div><button class="close-btn" data-close="questionModal">×</button></div>
-    <div id="questionDetail" class="detail-body"></div>
-    <div class="modal-actions"><button class="secondary-action" id="favoriteDetailBtn">☆ Favorite</button><button class="primary-action" data-close="questionModal">Close</button></div>
-  </div></div>
-  <div id="accountModal" class="modal hidden"><div class="modal-card small-modal">
-    <div class="modal-head"><h2>Account</h2><button class="close-btn" data-close="accountModal">×</button></div>
-    <div class="account-body"><div class="big-avatar">◯</div><h3 id="accountModalName">CHIEW MU SHEN</h3><p>Student</p><button class="primary-action" id="logoutBtn">Log out</button></div>
-  </div></div>
+<section id="favoritesView" class="view content-view hidden"><div class="section-label">HISTORY</div><h2>My Questions</h2><p class="muted-text">Your saved questions.</p><div id="favoritesList" class="favorites-list"></div></section>
+</main>
+
+<div id="questionModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow dark-eyebrow">QUESTION</span><h2 id="modalTitle">Question</h2></div><button class="close-btn" data-close="questionModal">×</button></div><div id="questionDetail" class="detail-body"></div><div class="modal-actions"><button class="secondary-action" id="favoriteDetailBtn">☆ Favorite</button><button class="primary-action" data-close="questionModal">Close</button></div></div></div>
+<div id="accountModal" class="modal hidden"><div class="modal-card small-modal"><div class="modal-head"><h2>Account</h2><button class="close-btn" data-close="accountModal">×</button></div><div class="account-body"><div class="big-avatar">◯</div><h3>CHIEW MU SHEN</h3><p>Student</p><button class="primary-action" id="logoutBtn">Log out</button></div></div></div>
 </div>
 </body>
 </html>
