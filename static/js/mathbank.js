@@ -1,47 +1,37 @@
 (() => {
-  'use strict';
-  const STORE = 'sam_edugpt_student_v1';
-  const seed = [
-    {id:'F4-1-001',chapter:'Chapter 1 Functions',difficulty:'Easy',source:'SPM',year:2024,marks:4,question:'Given f(x)=2x+3, find f(5).',answer:'13',solution:'Substitute x=5.\n\nf(5)=2(5)+3=13.'},
-    {id:'F4-1-002',chapter:'Chapter 1 Functions',difficulty:'Medium',source:'SPM',year:2025,marks:6,question:'Given f(x)=2x+1 and g(x)=x², find (g ∘ f)(2).',answer:'25',solution:'First find f(2)=5. Then g(5)=25.'},
-    {id:'F4-1-003',chapter:'Chapter 1 Functions',difficulty:'Hard',source:'Trial',year:2025,marks:8,question:'Find the inverse of f(x)=3x−4.',answer:'f⁻¹(x)=(x+4)/3',solution:'Let y=3x−4. Swap x and y, then solve for y.'},
-    {id:'F4-2-001',chapter:'Chapter 2 Quadratic Functions',difficulty:'Medium',source:'SPM',year:2023,marks:5,question:'Solve x²−5x+6=0.',answer:'x=2 or x=3',solution:'Factorise: (x−2)(x−3)=0.'}
-  ];
-  let db = JSON.parse(localStorage.getItem(STORE) || 'null') || {favorites:[]};
-  const $ = id => document.getElementById(id);
-  const save = () => localStorage.setItem(STORE, JSON.stringify(db));
-  const show = id => { document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden')); $(id+'View')?.classList.remove('hidden'); };
-
-  function renderQuestions(list = seed) {
-    const box = $('questionList'); if (!box) return;
-    box.innerHTML = list.map(q => `<article class="student-question-card"><div class="question-meta"><span>${q.id}</span><span>${q.difficulty}</span><span>${q.source} ${q.year}</span><span>${q.marks} marks</span></div><h3>${q.chapter}</h3><p>${escapeHtml(q.question)}</p><button class="primary-action" data-question="${q.id}">Open question</button></article>`).join('');
-    box.querySelectorAll('[data-question]').forEach(b => b.addEventListener('click', () => openQuestion(b.dataset.question)));
-  }
-  function renderFavorites(){
-    const list = seed.filter(q => db.favorites.includes(q.id));
-    const box = $('favoritesList'); if (!box) return;
-    box.innerHTML = list.length ? list.map(q => `<article class="student-question-card"><div class="question-meta"><span>${q.id}</span><span>${q.difficulty}</span></div><h3>${q.chapter}</h3><p>${escapeHtml(q.question)}</p><button class="primary-action" data-question="${q.id}">Open question</button></article>`).join('') : '<div class="student-question-card"><h3>No saved questions</h3><p>Questions you save will appear here.</p></div>';
-    box.querySelectorAll('[data-question]').forEach(b => b.addEventListener('click', () => openQuestion(b.dataset.question)));
-  }
-  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-  let activeQuestion = null;
-  function openQuestion(id){
-    activeQuestion = seed.find(q=>q.id===id); if(!activeQuestion)return;
-    $('modalTitle').textContent = activeQuestion.id;
-    $('questionDetail').innerHTML = `<div class="detail-section"><div class="detail-label">QUESTION</div><div>${escapeHtml(activeQuestion.question)}</div></div><div class="detail-section"><div class="detail-label">ANSWER</div><div>${escapeHtml(activeQuestion.answer)}</div></div><div class="detail-section"><div class="detail-label">SOLUTION</div><pre>${escapeHtml(activeQuestion.solution)}</pre></div>`;
-    $('favoriteDetailBtn').textContent = db.favorites.includes(id) ? '★ Saved' : '☆ Favorite';
-    $('questionModal').classList.remove('hidden');
-  }
-  document.addEventListener('click', e => {
-    const nav = e.target.closest('[data-nav]');
-    if(nav){ show(nav.dataset.nav === 'questions' ? 'questions' : nav.dataset.nav === 'favorites' ? 'favorites' : 'dashboard'); if(nav.dataset.nav==='questions')renderQuestions(); if(nav.dataset.nav==='favorites')renderFavorites(); }
-    const close = e.target.closest('[data-close]'); if(close) $(close.dataset.close)?.classList.add('hidden');
-  });
-  $('randomBtn')?.addEventListener('click', () => openQuestion(seed[Math.floor(Math.random()*seed.length)].id));
-  $('favoriteDetailBtn')?.addEventListener('click', () => { if(!activeQuestion)return; const i=db.favorites.indexOf(activeQuestion.id); if(i<0)db.favorites.push(activeQuestion.id);else db.favorites.splice(i,1); save(); $('favoriteDetailBtn').textContent=db.favorites.includes(activeQuestion.id)?'★ Saved':'☆ Favorite'; renderFavorites(); });
-  $('accountBtn')?.addEventListener('click',()=> $('accountModal')?.classList.remove('hidden'));
-  $('logoutBtn')?.addEventListener('click',()=> $('accountModal')?.classList.add('hidden'));
-  $('menuBtn')?.addEventListener('click',()=>document.querySelector('.sidebar')?.classList.toggle('open'));
-  $('themeBtn')?.addEventListener('click',()=>document.body.classList.toggle('dark'));
-  renderQuestions();
+'use strict';
+const STORE='sam_edugpt_student_v2';
+const questions=[
+{id:'4818',question:'In a large shipment of second-hand T-shirts, 4% of the T-shirts are torn. The T-shirts are sold in boxes of 25 pieces each. Let X denote the number of torn T-shirts...',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability...',subtopic:'Probability, Discrete...',status:'seen'},
+{id:'4817',question:'A company advertises that its rechargeable batteries can run non-stop for an average of 505 minutes after a full charge. 100 batteries are randomly...',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability...',subtopic:'Sampling, Normal...',status:'not-seen'},
+{id:'4816',question:'In this question, you should state the parameters of any normal distributions you use. A confectionary bakes egg tarts for sale. The masses of these...',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability...',subtopic:'Normal distributi...',status:'not-seen'},
+{id:'4815',question:'Andy is learning how to solve a Rubik’s cube. The table shows his personal record time, y seconds, for solving a Rubik’s cube, x days after he st...',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability...',subtopic:'Correlation and...',status:'not-seen'},
+{id:'4814',question:'Customers at a shopping mall participate in a game involving 2 boxes of tokens, labelled A and B. Box A contains n black tokens and 4 gold to...',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability...',subtopic:'Discrete random...',status:'not-seen'},
+{id:'4813',question:'A random sample is selected from a population. The sample results are used to make an inference about the population parameter.',paper:'2025 PRELIM',source:'–',component:'Paper 1',subject:'H2 Mathematics',level:'JC 2',topic:'Statistics',subtopic:'Sampling methods',status:'not-seen'},
+{id:'4812',question:'The lifetime of a particular electronic component is modelled by a normal distribution. Find the probability that a randomly selected component...',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability',subtopic:'Normal distribution',status:'seen'},
+{id:'4811',question:'The following data show the scores obtained by a group of students. Calculate the mean and standard deviation of the data.',paper:'2025 PRELIM',source:'–',component:'Paper 1',subject:'H2 Mathematics',level:'JC 2',topic:'Statistics',subtopic:'Measures of spread',status:'not-seen'},
+{id:'4810',question:'A discrete random variable X has the probability distribution shown. Find the value of the unknown constant and hence calculate E(X).',paper:'2025 PRELIM',source:'–',component:'Paper 2',subject:'H2 Mathematics',level:'JC 2',topic:'Probability',subtopic:'Discrete random variables',status:'not-seen'},
+{id:'4809',question:'Two events A and B are given with their probabilities. Determine whether the events are independent and justify your answer.',paper:'2025 PRELIM',source:'–',component:'Paper 1',subject:'H2 Mathematics',level:'JC 2',topic:'Probability',subtopic:'Independent events',status:'not-seen'}
+];
+let db=JSON.parse(localStorage.getItem(STORE)||'null')||{favorites:[]};
+const $=id=>document.getElementById(id);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let filtered=[...questions],currentPage=1,pageSize=10,currentStatus='all',activeQuestion=null;
+function renderTable(){
+ const start=(currentPage-1)*pageSize,page=filtered.slice(start,start+pageSize),rows=$('questionRows');
+ rows.innerHTML=page.map(q=>`<tr><td class="id-cell">${q.id}</td><td><div class="question-cell">${esc(q.question)}</div></td><td>${q.paper}</td><td>${q.source}</td><td>${q.component}</td><td class="subject-cell">${q.subject}</td><td>${q.level}</td><td>${q.topic}</td><td>${q.subtopic}</td><td><button class="${q.status==='seen'?'status-seen':'status-notseen'}" data-question="${q.id}">${q.status==='seen'?'Seen':'Not seen'}</button></td></tr>`).join('');
+ rows.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>openQuestion(b.dataset.question)));
+ $('tableInfo').textContent=filtered.length?`Showing ${start+1} to ${Math.min(start+pageSize,filtered.length)} of ${filtered.length} entries`:'No entries found';
+ renderPagination();
+}
+function renderPagination(){const total=Math.max(1,Math.ceil(filtered.length/pageSize));currentPage=Math.min(currentPage,total);const box=$('pagination');box.innerHTML='';for(let i=1;i<=total;i++){const b=document.createElement('button');b.textContent=i;b.className=i===currentPage?'active':'';b.onclick=()=>{currentPage=i;renderTable()};box.appendChild(b)}}
+function applyFilters(){const term=$('searchInput').value.trim().toLowerCase();filtered=questions.filter(q=>{const matchesStatus=currentStatus==='all'||q.status===currentStatus;const text=[q.id,q.question,q.paper,q.source,q.component,q.subject,q.level,q.topic,q.subtopic].join(' ').toLowerCase();return matchesStatus&&text.includes(term)});currentPage=1;renderTable()}
+function openQuestion(id){activeQuestion=questions.find(q=>q.id===id);if(!activeQuestion)return;$('modalTitle').textContent=activeQuestion.id;$('questionDetail').innerHTML=`<div class="detail-section"><div class="detail-label">QUESTION</div><div>${esc(activeQuestion.question)}</div></div><div class="detail-section"><div class="detail-label">PAPER TYPE</div><div>${esc(activeQuestion.paper)} · ${esc(activeQuestion.component)}</div></div><div class="detail-section"><div class="detail-label">TOPIC</div><div>${esc(activeQuestion.topic)} · ${esc(activeQuestion.subtopic)}</div></div>`;$('favoriteDetailBtn').textContent=db.favorites.includes(id)?'★ Saved':'☆ Favorite';$('questionModal').classList.remove('hidden')}
+function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));$(name+'View').classList.remove('hidden');document.querySelectorAll('.side-link').forEach(v=>v.classList.remove('active'));if(name==='questions')renderTable()}
+document.addEventListener('click',e=>{const n=e.target.closest('[data-nav]');if(n){e.preventDefault();showView(n.dataset.nav);return}const c=e.target.closest('[data-close]');if(c)$(c.dataset.close).classList.add('hidden')});
+$('searchInput')?.addEventListener('input',applyFilters);$('pageSize')?.addEventListener('change',e=>{pageSize=Number(e.target.value);currentPage=1;renderTable()});
+document.querySelectorAll('[data-status]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-status]').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentStatus=b.dataset.status;applyFilters()}));
+$('favoriteDetailBtn')?.addEventListener('click',()=>{if(!activeQuestion)return;const i=db.favorites.indexOf(activeQuestion.id);if(i<0)db.favorites.push(activeQuestion.id);else db.favorites.splice(i,1);localStorage.setItem(STORE,JSON.stringify(db));$('favoriteDetailBtn').textContent=db.favorites.includes(activeQuestion.id)?'★ Saved':'☆ Favorite'});
+$('accountBtn')?.addEventListener('click',()=>$('accountModal').classList.remove('hidden'));$('logoutBtn')?.addEventListener('click',()=>$('accountModal').classList.add('hidden'));$('menuBtn')?.addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));$('themeBtn')?.addEventListener('click',()=>document.body.classList.toggle('dark'));
+$('randomBtn')?.addEventListener('click',()=>openQuestion(questions[Math.floor(Math.random()*questions.length)].id));
+renderTable();
 })();
