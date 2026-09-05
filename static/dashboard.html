@@ -3,70 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Learn with Shen — Dashboard</title>
+<title>Dashboard</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/dashboard.css">
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] },
-  svg: { fontCache: 'global' }
-};
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <script defer src="js/mathbank.js"></script>
 </head>
 <body class="dashboard-mode">
 <div id="app">
 <aside class="sidebar">
-<a class="brand" href="#dashboard"><span class="brand-symbol"><i></i><i></i><i></i></span><span><b>Learn</b> with Shen</span></a>
-<div class="profile-card"><div class="avatar">◯</div><div class="profile-name">CHIEW MU SHEN</div><div class="profile-role">Student</div><button class="settings-btn" id="accountBtn">⚙</button></div>
-<div class="nav-label">MENU</div>
-<button class="side-link active" data-nav="dashboard"><span>▦</span>Dashboard</button>
-<div class="nav-label">CURRICULUM</div>
-<button class="side-link syllabus"><span>▥</span>Syllabuses</button>
-<button class="side-link child-link" aria-expanded="true"><span>▢</span><em>1449 Mathematics</em><b>▾</b></button>
-<div class="subject-menu">
-<button class="side-link nested-link"><span></span>Course Info</button>
-<button class="side-link nested-link"><span></span>Lesson</button>
-<button class="side-link nested-link"><span></span>Question Bank</button>
-<button class="side-link nested-link"><span></span>History</button>
-</div>
+  <a class="brand" href="dashboard.html"><span class="brand-symbol"><i></i><i></i><i></i></span><span>Question Bank</span></a>
+  <div class="nav-label">MENU</div>
+  <a class="side-link active" href="dashboard.html"><span>▦</span>Dashboard</a>
+  <a class="side-link" href="syllabuses.html"><span>▥</span>Syllabuses</a>
 </aside>
 <main class="main-area">
-<header class="topbar"><button class="menu-btn" id="menuBtn">☰</button><div class="top-spacer"></div><button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark mode"><span class="moon-icon"></span></button><span class="top-divider"></span><div class="top-avatar">◯</div><span class="top-name">CHIEW MU SHEN</span><span class="top-chevron">⌄</span></header>
-<section id="dashboardView" class="view dashboard"><div class="formula-deck">
-<div class="formula-intro"><div class="eyebrow">LEARN WITH SHEN</div><h1>Formula Cards</h1><p>Quick revision cards for important Additional Mathematics formulas.</p></div>
+<header class="topbar"><button class="menu-btn" id="menuBtn">☰</button><div class="top-spacer"></div><button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark mode"><span class="moon-icon"></span></button><span class="top-divider"></span><div class="top-avatar">◯</div></header>
+<section class="view dashboard"><div class="formula-deck">
+<div class="formula-intro"><div class="eyebrow">QUESTION BANK</div><h1>Formula Cards</h1><p>Quick revision cards for important formulas.</p></div>
 <div class="formula-grid">
-<article class="formula-card" tabindex="0" role="button" aria-label="Differentiation formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">DIFFERENTIATION <span>01</span></div><div class="formula-main">\(\displaystyle \frac{d}{dx}(x^n)=nx^{n-1}\)</div><div class="formula-note">Power rule</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">DIFFERENTIATION</div><div class="back-title">Power Rule</div><p>Multiply by the power, then reduce the power by 1.</p><div class="back-example">\(x^5 \rightarrow 5x^4\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
-<article class="formula-card" tabindex="0" role="button" aria-label="Integration formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">INTEGRATION <span>02</span></div><div class="formula-main">\(\displaystyle \int x^n\,dx=\frac{x^{n+1}}{n+1}+C\)</div><div class="formula-note">For \(n\ne-1\)</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">INTEGRATION</div><div class="back-title">Power Rule</div><p>Increase the power by 1 and divide by the new power.</p><div class="back-example">\(\displaystyle \int x^2\,dx=\frac{x^3}{3}+C\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
-<article class="formula-card" tabindex="0" role="button" aria-label="Circular measure formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">CIRCULAR MEASURE <span>03</span></div><div class="formula-main">\(\displaystyle s=r\theta\)</div><div class="formula-note">\(\theta\) must be in radians</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">CIRCULAR MEASURE</div><div class="back-title">Arc Length</div><p>Use this formula when θ is measured in radians.</p><div class="back-example">\(\displaystyle s=r\theta\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
-</div>
-<div class="formula-nav"><span>STEP-BY-STEP REVISION</span><span>03 FORMULA CARDS</span></div>
-</div></section>
-<section id="questionsView" class="view content-view hidden">
-<div class="breadcrumb"><span>Learn with Shen</span><b>›</b><span>1449 Mathematics</span><b>›</b><span class="muted">Practice questions</span></div>
-<div class="section-label">PRACTICE QUESTIONS</div>
-<div class="question-hero"><div class="question-hero-title">▥&nbsp; 1449 Mathematics</div><div class="question-hero-subtitle">Browse filtered questions.</div><button class="all-pill">All</button></div>
-<button class="back-button" data-nav="dashboard">←&nbsp; Back to syllabus</button>
-<div class="question-panel"><div class="status-row"><span class="status-label">Status:</span><button class="status-pill active" data-status="all">All</button><button class="status-pill" data-status="not-seen">Not seen</button><button class="status-pill" data-status="seen">Seen</button></div>
-<div class="table-toolbar"><label><select id="pageSize"><option>10</option><option>25</option><option>50</option></select><span>entries per page</span></label><label class="search-box">Search:<input id="searchInput" type="search"></label></div>
-<div class="table-wrap"><table><thead><tr><th>ID <span>↕</span></th><th>QUESTION</th><th>PAPER TYPE</th><th>SOURCE</th><th>COMPONENT</th><th>SUBJECT</th><th>LEVEL</th><th>TOPICS</th><th>SUBTOPICS</th><th>STATUS <span>↕</span></th></tr></thead><tbody id="questionRows"></tbody></table></div>
-<div class="table-footer"><span id="tableInfo"></span><div class="pagination" id="pagination"></div></div></div>
-</section>
+<article class="formula-card" tabindex="0" role="button"><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">DIFFERENTIATION <span>01</span></div><div class="formula-main">\(\displaystyle \frac{d}{dx}(x^n)=nx^{n-1}\)</div><div class="formula-note">Power rule</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">DIFFERENTIATION</div><div class="back-title">Power Rule</div><p>Multiply by the power, then reduce the power by 1.</p><div class="back-example">\(x^5 \rightarrow 5x^4\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
+<article class="formula-card" tabindex="0" role="button"><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">INTEGRATION <span>02</span></div><div class="formula-main">\(\displaystyle \int x^n\,dx=\frac{x^{n+1}}{n+1}+C\)</div><div class="formula-note">For \(n\ne-1\)</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">INTEGRATION</div><div class="back-title">Power Rule</div><p>Increase the power by 1 and divide by the new power.</p><div class="back-example">\(\displaystyle \int x^2\,dx=\frac{x^3}{3}+C\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
+<article class="formula-card" tabindex="0" role="button"><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">CIRCULAR MEASURE <span>03</span></div><div class="formula-main">\(\displaystyle s=r\theta\)</div><div class="formula-note">\(\theta\) must be in radians</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">CIRCULAR MEASURE</div><div class="back-title">Arc Length</div><p>Use this formula when θ is measured in radians.</p><div class="back-example">\(\displaystyle s=r\theta\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
+</div></div></section>
 </main>
-<div id="questionModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow dark-eyebrow">QUESTION</span><h2 id="modalTitle">Question</h2></div><button class="close-btn" data-close="questionModal">×</button></div><div id="questionDetail" class="detail-body"></div><div class="modal-actions"><button class="secondary-action" id="favoriteDetailBtn">☆ Favorite</button><button class="primary-action" data-close="questionModal">Close</button></div></div></div>
-<div id="accountModal" class="modal hidden"><div class="modal-card small-modal"><div class="modal-head"><h2>Account</h2><button class="close-btn" data-close="accountModal">×</button></div><div class="account-body"><div class="big-avatar">◯</div><h3>CHIEW MU SHEN</h3><p>Student</p><button class="primary-action" id="logoutBtn">Log out</button></div></div></div>
-</div>
 <script>
-document.querySelectorAll('.formula-card').forEach(card => {
-  const flip = () => card.classList.toggle('is-flipped');
-  card.addEventListener('click', flip);
-  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
-});
+document.querySelectorAll('.formula-card').forEach(card=>{const flip=()=>card.classList.toggle('is-flipped');card.addEventListener('click',flip);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}});});
 </script>
 </body>
 </html>
