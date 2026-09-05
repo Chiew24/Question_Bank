@@ -26,12 +26,21 @@ function renderTable(){
 function renderPagination(){const total=Math.max(1,Math.ceil(filtered.length/pageSize));currentPage=Math.min(currentPage,total);const box=$('pagination');box.innerHTML='';for(let i=1;i<=total;i++){const b=document.createElement('button');b.textContent=i;b.className=i===currentPage?'active':'';b.onclick=()=>{currentPage=i;renderTable()};box.appendChild(b)}}
 function applyFilters(){const term=$('searchInput').value.trim().toLowerCase();filtered=questions.filter(q=>{const matchesStatus=currentStatus==='all'||q.status===currentStatus;const text=[q.id,q.question,q.paper,q.source,q.component,q.subject,q.level,q.topic,q.subtopic].join(' ').toLowerCase();return matchesStatus&&text.includes(term)});currentPage=1;renderTable()}
 function openQuestion(id){activeQuestion=questions.find(q=>q.id===id);if(!activeQuestion)return;$('modalTitle').textContent=activeQuestion.id;$('questionDetail').innerHTML=`<div class="detail-section"><div class="detail-label">QUESTION</div><div>${esc(activeQuestion.question)}</div></div><div class="detail-section"><div class="detail-label">PAPER TYPE</div><div>${esc(activeQuestion.paper)} · ${esc(activeQuestion.component)}</div></div><div class="detail-section"><div class="detail-label">TOPIC</div><div>${esc(activeQuestion.topic)} · ${esc(activeQuestion.subtopic)}</div></div>`;$('favoriteDetailBtn').textContent=db.favorites.includes(id)?'★ Saved':'☆ Favorite';$('questionModal').classList.remove('hidden')}
-function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));$(name+'View').classList.remove('hidden');document.querySelectorAll('.side-link').forEach(v=>v.classList.remove('active'));if(name==='questions')renderTable()}
+function showView(name){
+ document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+ $(name+'View').classList.remove('hidden');
+ document.querySelectorAll('.side-link').forEach(v=>v.classList.remove('active'));
+ document.body.classList.toggle('dashboard-mode',name==='dashboard');
+ if(name==='dashboard')$('dashboardView').classList.remove('hidden');
+ if(name==='questions')renderTable();
+}
 document.addEventListener('click',e=>{const n=e.target.closest('[data-nav]');if(n){e.preventDefault();showView(n.dataset.nav);return}const c=e.target.closest('[data-close]');if(c)$(c.dataset.close).classList.add('hidden')});
 $('searchInput')?.addEventListener('input',applyFilters);$('pageSize')?.addEventListener('change',e=>{pageSize=Number(e.target.value);currentPage=1;renderTable()});
 document.querySelectorAll('[data-status]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-status]').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentStatus=b.dataset.status;applyFilters()}));
 $('favoriteDetailBtn')?.addEventListener('click',()=>{if(!activeQuestion)return;const i=db.favorites.indexOf(activeQuestion.id);if(i<0)db.favorites.push(activeQuestion.id);else db.favorites.splice(i,1);localStorage.setItem(STORE,JSON.stringify(db));$('favoriteDetailBtn').textContent=db.favorites.includes(activeQuestion.id)?'★ Saved':'☆ Favorite'});
 $('accountBtn')?.addEventListener('click',()=>$('accountModal').classList.remove('hidden'));$('logoutBtn')?.addEventListener('click',()=>$('accountModal').classList.add('hidden'));$('menuBtn')?.addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));$('themeBtn')?.addEventListener('click',()=>document.body.classList.toggle('dark'));
 $('randomBtn')?.addEventListener('click',()=>openQuestion(questions[Math.floor(Math.random()*questions.length)].id));
+const dashboardCss=document.createElement('link');dashboardCss.rel='stylesheet';dashboardCss.href='css/dashboard.css';document.head.appendChild(dashboardCss);
+showView('dashboard');
 renderTable();
 })();
