@@ -1,38 +1,69 @@
-# Math Question Bank
+# Learn with Shen — Question Bank
 
-This repository is the **GitHub Pages / static-web version** of the MathBank Question Bank workflow.
+A modern, student-focused **Additional Mathematics learning website** built with HTML, CSS, and JavaScript.
 
-## Included in this web build
+The project provides a simple learning space for students to review mathematics formulas, explore syllabus content, and practise questions.
 
-- Responsive desktop / tablet / mobile layout
-- Login and student self-registration
-- Admin and Student roles
-- Question ID, marks, chapter, source, source year, tags
-- Easy / Medium / Hard difficulty
-- Active / Archived status
-- Public / Private visibility
-- Add, edit, delete, preview
-- Delete confirmation and duplicate Question ID validation
-- LaTeX math input and KaTeX rendering
-- Search and filter: Chapter → Difficulty → Source
-- Favorites for Admin and Student
-- Random question selection
-- Dashboard and statistics without charts
-- Student dashboard
-- English UI
-- Browser persistence with `localStorage`
+## Current Website
 
-## Intentionally excluded from the GitHub Pages build
+The current website includes:
 
-The original desktop package contains Python/FastAPI server code, a bundled Windows Python runtime, OCR services, AI providers, PDF/Word export, and paper-generation workflows. Those are not part of this static website because GitHub Pages cannot execute the desktop/backend runtime. Practice/Paper/AI/OCR features are also postponed according to the current project scope.
+- **Dashboard** as the main landing page
+- **Formula Cards** for quick mathematics revision
+- Interactive flashcards with a **click-to-flip** effect
+- **LaTeX / MathJax** rendering for mathematical formulas
+- **1449 Mathematics** curriculum section
+- Course Info
+- Lesson
+- Question Bank
+- History
+- Light / Dark mode toggle
+- Responsive layout for different screen sizes
+- Learn with Shen branding
 
-## Run
+## Formula Cards
 
-Open `index.html` through GitHub Pages. The root page redirects to `static/index.html`.
+The Dashboard currently presents formula flashcards for topics such as:
 
-Demo admin account:
+- Differentiation
+- Integration
+- Circular Measure
 
-- Email: `admin@mathbank.local`
-- Password: `admin123`
+Each card can be clicked to reveal the reverse side with an explanation and example.
 
-> This is a frontend-only V1. Authentication and question data are stored locally in the browser. Supabase/backend integration should be added later for real multi-user production use.
+## Technology
+
+- HTML5
+- CSS3
+- JavaScript
+- MathJax for mathematical notation
+- GitHub Pages for static website hosting
+
+## Project Structure
+
+```text
+Question_Bank/
+├── static/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── css/
+│   │   ├── app.css
+│   │   └── dashboard.css
+│   └── js/
+│       └── mathbank.js
+└── README.md
+```
+
+## Running the Website
+
+The website can be accessed through GitHub Pages. The root `index.html` redirects users to the Dashboard.
+
+## Project Status
+
+This is an ongoing project. More syllabus content, lessons, formula cards, and question-bank features can be added as development continues.
+
+## Brand
+
+**Learn with Shen**
+
+A learning platform focused on making Additional Mathematics revision clear, organised, and easier to practise.
