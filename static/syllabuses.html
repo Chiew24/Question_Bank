@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Syllabuses</title>
+<link rel="stylesheet" href="css/app.css">
+<style>
+.syllabuses-page{min-height:100vh;padding:70px 7%;background:#f7f5ef;color:#263f3e}.syllabuses-page .heading{text-align:center;margin-bottom:55px}.syllabuses-page h1{font-size:48px;margin:0 0 12px}.syllabuses-page .intro{color:#718381;font-size:17px}.syllabus-options{max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}.syllabus-option{display:block;text-decoration:none;color:inherit;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px;padding:38px;min-height:240px;transition:.2s ease;box-shadow:0 4px 15px rgba(38,63,62,.05)}.syllabus-option:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(38,63,62,.12);border-color:#2f9c95}.syllabus-option .label{font-size:11px;font-weight:800;letter-spacing:1.3px;color:#2f9c95;margin-bottom:15px}.syllabus-option h2{font-size:27px;margin:0 0 12px}.syllabus-option p{color:#718381;line-height:1.65;margin:0}.syllabus-option .arrow{display:inline-block;margin-top:28px;font-weight:800;color:#2f9c95}.back{display:inline-block;margin-bottom:35px;color:#2f9c95;text-decoration:none;font-weight:700}@media(max-width:700px){.syllabuses-page{padding:45px 20px}.syllabuses-page h1{font-size:38px}.syllabus-options{grid-template-columns:1fr}.syllabus-option{padding:30px}}
+</style>
+</head>
+<body>
+<main class="syllabuses-page">
+<a class="back" href="dashboard.html">← Back to Dashboard</a>
+<header class="heading">
+<h1>Syllabuses</h1>
+<p class="intro">Choose how you want to continue.</p>
+</header>
+<section class="syllabus-options" aria-label="Syllabus options">
+<a class="syllabus-option" href="#my-syllabuses">
+<div class="label">YOUR LEARNING</div>
+<h2>My Syllabuses</h2>
+<p>View the syllabuses you have selected and continue your learning.</p>
+<span class="arrow">Open My Syllabuses →</span>
+</a>
+<a class="syllabus-option" href="#explore-syllabuses">
+<div class="label">DISCOVER</div>
+<h2>Explore Syllabuses</h2>
+<p>Browse available syllabuses and discover what you can learn.</p>
+<span class="arrow">Explore Syllabuses →</span>
+</a>
+</section>
+<section id="my-syllabuses" style="max-width:1000px;margin:50px auto 0;padding:30px;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px">
+<h2>My Syllabuses</h2><p style="color:#718381">Your selected syllabuses will appear here.</p>
+</section>
+<section id="explore-syllabuses" style="max-width:1000px;margin:24px auto 0;padding:30px;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px">
+<h2>Explore Syllabuses</h2><p style="color:#718381">Available syllabuses will appear here.</p>
+</section>
+</main>
+</body>
+</html>
