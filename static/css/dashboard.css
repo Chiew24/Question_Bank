@@ -1,8 +1,8 @@
-/* Dashboard page matching the supplied SAM EduGPT reference */
+/* Dashboard page with warm cream palette */
 .dashboard-mode .main-area{
-  background-color:#0b1422;
+  background-color:#e9dfd1;
   background-image:
-    linear-gradient(90deg,rgba(5,14,27,.08),rgba(5,14,27,.10)),
+    linear-gradient(90deg,rgba(73,58,44,.18),rgba(73,58,44,.12)),
     url('https://images.unsplash.com/photo-1711994872186-dc24d83ff99c?auto=format&fit=crop&fm=jpg&q=85&w=2400');
   background-size:cover;
   background-position:center;
@@ -21,15 +21,15 @@
   min-height:690px;
   margin:0;
   padding:66px 64px 62px;
-  border:1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
   border-radius:18px;
-  background:rgba(18,35,61,.80);
-  box-shadow:0 25px 65px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);
+  background:rgba(81,70,59,.82);
+  box-shadow:0 25px 65px rgba(72,57,43,.28),inset 0 1px 0 rgba(255,255,255,.12);
   backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(5px);
 }
 .dashboard-mode .eyebrow{
-  color:#d3dce9;
+  color:#eee4d8;
   font-size:13px;
   letter-spacing:1.65px;
 }
@@ -43,14 +43,14 @@
 .dashboard-mode .typing-cursor{
   height:58px;
   width:3px;
-  background:#fff;
+  background:#fffdf8;
   margin-left:6px;
   vertical-align:-7px;
   animation:dashboardCursor .9s steps(1) infinite;
 }
 .dashboard-mode .hero-copy{
   margin:0 0 34px;
-  color:#dce2ec;
+  color:#e9dfd4;
   font-size:19px;
   line-height:1.48;
 }
@@ -65,43 +65,43 @@
   font-size:17px;
 }
 .dashboard-mode .primary-action{
-  background:#6677dc;
-  box-shadow:0 7px 18px rgba(102,119,220,.22);
+  background:#b08a63;
+  box-shadow:0 7px 18px rgba(90,68,47,.22);
 }
-.dashboard-mode .primary-action:hover{background:#7484e5;transform:translateY(-1px)}
+.dashboard-mode .primary-action:hover{background:#bd9872;transform:translateY(-1px)}
 .dashboard-mode .secondary-action{
-  background:rgba(18,40,68,.74);
-  border-color:rgba(153,169,195,.55);
+  background:rgba(72,60,49,.82);
+  border-color:rgba(218,204,188,.55);
 }
-.dashboard-mode .secondary-action:hover{background:rgba(30,54,84,.9)}
+.dashboard-mode .secondary-action:hover{background:rgba(88,72,58,.95)}
 .dashboard-mode .promo-card,
 .dashboard-mode .evergreen-card{
-  background:rgba(64,75,96,.76);
-  border:1px solid rgba(255,255,255,.19);
-  box-shadow:0 7px 20px rgba(0,0,0,.10);
+  background:rgba(106,91,77,.80);
+  border:1px solid rgba(255,255,255,.20);
+  box-shadow:0 7px 20px rgba(62,47,35,.12);
 }
 .dashboard-mode .promo-card{
-  border-left:4px solid #19bf78;
+  border-left:4px solid #7d9a78;
   margin-bottom:21px;
   padding:16px;
 }
 .dashboard-mode .promo-title span{
-  background:#6878dc;
+  background:#a67c52;
   padding:4px 6px;
   border-radius:5px;
 }
 .dashboard-mode .promo-card p,
 .dashboard-mode .evergreen-card p{
-  color:#e0e4ea;
+  color:#eee5dc;
   line-height:1.5;
 }
 .dashboard-mode .promo-card button{
-  background:#6879df;
+  background:#a67c52;
   transition:.15s ease;
 }
 .dashboard-mode .promo-card button:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .dashboard-mode .evergreen-card{
-  border-left:4px solid #bcc2cc;
+  border-left:4px solid #d0c4b6;
   padding:16px;
 }
 @keyframes dashboardCursor{50%{opacity:0}}
