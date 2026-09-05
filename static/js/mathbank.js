@@ -16,32 +16,17 @@ const questions=[
 let db=JSON.parse(localStorage.getItem(STORE)||'null')||{favorites:[]};
 const $=id=>document.getElementById(id);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let filtered=[...questions],currentPage=1,pageSize=10,currentStatus='all',activeQuestion=null;
-function renderTable(){
- const start=(currentPage-1)*pageSize,page=filtered.slice(start,start+pageSize),rows=$('questionRows');
- rows.innerHTML=page.map(q=>`<tr><td class="id-cell">${q.id}</td><td><div class="question-cell">${esc(q.question)}</div></td><td>${q.paper}</td><td>${q.source}</td><td>${q.component}</td><td class="subject-cell">${q.subject}</td><td>${q.level}</td><td>${q.topic}</td><td>${q.subtopic}</td><td><button class="${q.status==='seen'?'status-seen':'status-notseen'}" data-question="${q.id}">${q.status==='seen'?'Seen':'Not seen'}</button></td></tr>`).join('');
- rows.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>openQuestion(b.dataset.question)));
- $('tableInfo').textContent=filtered.length?`Showing ${start+1} to ${Math.min(start+pageSize,filtered.length)} of ${filtered.length} entries`:'No entries found';
- renderPagination();
-}
+function renderTable(){const start=(currentPage-1)*pageSize,page=filtered.slice(start,start+pageSize),rows=$('questionRows');rows.innerHTML=page.map(q=>`<tr><td class="id-cell">${q.id}</td><td><div class="question-cell">${esc(q.question)}</div></td><td>${q.paper}</td><td>${q.source}</td><td>${q.component}</td><td class="subject-cell">${q.subject}</td><td>${q.level}</td><td>${q.topic}</td><td>${q.subtopic}</td><td><button class="${q.status==='seen'?'status-seen':'status-notseen'}" data-question="${q.id}">${q.status==='seen'?'Seen':'Not seen'}</button></td></tr>`).join('');rows.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>openQuestion(b.dataset.question)));$('tableInfo').textContent=filtered.length?`Showing ${start+1} to ${Math.min(start+pageSize,filtered.length)} of ${filtered.length} entries`:'No entries found';renderPagination()}
 function renderPagination(){const total=Math.max(1,Math.ceil(filtered.length/pageSize));currentPage=Math.min(currentPage,total);const box=$('pagination');box.innerHTML='';for(let i=1;i<=total;i++){const b=document.createElement('button');b.textContent=i;b.className=i===currentPage?'active':'';b.onclick=()=>{currentPage=i;renderTable()};box.appendChild(b)}}
 function applyFilters(){const term=$('searchInput').value.trim().toLowerCase();filtered=questions.filter(q=>{const matchesStatus=currentStatus==='all'||q.status===currentStatus;const text=[q.id,q.question,q.paper,q.source,q.component,q.subject,q.level,q.topic,q.subtopic].join(' ').toLowerCase();return matchesStatus&&text.includes(term)});currentPage=1;renderTable()}
 function openQuestion(id){activeQuestion=questions.find(q=>q.id===id);if(!activeQuestion)return;$('modalTitle').textContent=activeQuestion.id;$('questionDetail').innerHTML=`<div class="detail-section"><div class="detail-label">QUESTION</div><div>${esc(activeQuestion.question)}</div></div><div class="detail-section"><div class="detail-label">PAPER TYPE</div><div>${esc(activeQuestion.paper)} · ${esc(activeQuestion.component)}</div></div><div class="detail-section"><div class="detail-label">TOPIC</div><div>${esc(activeQuestion.topic)} · ${esc(activeQuestion.subtopic)}</div></div>`;$('favoriteDetailBtn').textContent=db.favorites.includes(id)?'★ Saved':'☆ Favorite';$('questionModal').classList.remove('hidden')}
-function showView(name){
- document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
- $(name+'View').classList.remove('hidden');
- document.querySelectorAll('.side-link').forEach(v=>v.classList.remove('active'));
- document.body.classList.toggle('dashboard-mode',name==='dashboard');
- if(name==='dashboard')$('dashboardView').classList.remove('hidden');
- if(name==='questions')renderTable();
-}
+function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));$(name+'View').classList.remove('hidden');document.querySelectorAll('.side-link[data-nav]').forEach(v=>v.classList.toggle('active',v.dataset.nav===name));document.body.classList.toggle('dashboard-mode',name==='dashboard');if(name==='questions')renderTable()}
 document.addEventListener('click',e=>{const n=e.target.closest('[data-nav]');if(n){e.preventDefault();showView(n.dataset.nav);return}const c=e.target.closest('[data-close]');if(c)$(c.dataset.close).classList.add('hidden')});
-$('searchInput')?.addEventListener('input',applyFilters);$('pageSize')?.addEventListener('change',e=>{pageSize=Number(e.target.value);currentPage=1;renderTable()});
-document.querySelectorAll('[data-status]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-status]').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentStatus=b.dataset.status;applyFilters()}));
+$('searchInput')?.addEventListener('input',applyFilters);$('pageSize')?.addEventListener('change',e=>{pageSize=Number(e.target.value);currentPage=1;renderTable()});document.querySelectorAll('[data-status]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-status]').forEach(x=>x.classList.remove('active'));b.classList.add('active');currentStatus=b.dataset.status;applyFilters()}));
 $('favoriteDetailBtn')?.addEventListener('click',()=>{if(!activeQuestion)return;const i=db.favorites.indexOf(activeQuestion.id);if(i<0)db.favorites.push(activeQuestion.id);else db.favorites.splice(i,1);localStorage.setItem(STORE,JSON.stringify(db));$('favoriteDetailBtn').textContent=db.favorites.includes(activeQuestion.id)?'★ Saved':'☆ Favorite'});
-$('accountBtn')?.addEventListener('click',()=>$('accountModal').classList.remove('hidden'));$('logoutBtn')?.addEventListener('click',()=>$('accountModal').classList.add('hidden'));$('menuBtn')?.addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));$('themeBtn')?.addEventListener('click',()=>document.body.classList.toggle('dark'));
+$('accountBtn')?.addEventListener('click',()=>$('accountModal').classList.remove('hidden'));$('logoutBtn')?.addEventListener('click',()=>$('accountModal').classList.add('hidden'));$('menuBtn')?.addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));
+const savedTheme=localStorage.getItem('learn_with_shen_theme');if(savedTheme==='dark')document.body.classList.add('dark');$('themeBtn')?.addEventListener('click',()=>{document.body.classList.toggle('dark');localStorage.setItem('learn_with_shen_theme',document.body.classList.contains('dark')?'dark':'light')});
 $('randomBtn')?.addEventListener('click',()=>openQuestion(questions[Math.floor(Math.random()*questions.length)].id));
 const childMenu=document.querySelector('.child-link');const subjectMenu=document.querySelector('.subject-menu');if(childMenu&&subjectMenu){childMenu.setAttribute('aria-expanded','true');childMenu.addEventListener('click',()=>{const collapsed=subjectMenu.classList.toggle('collapsed');childMenu.setAttribute('aria-expanded',String(!collapsed));const arrow=childMenu.querySelector('b');if(arrow)arrow.textContent=collapsed?'⌄':'⌃';})}
-const dashboardCss=document.createElement('link');dashboardCss.rel='stylesheet';dashboardCss.href='css/dashboard.css';document.head.appendChild(dashboardCss);
-showView('dashboard');
-renderTable();
+const dashboardCss=document.createElement('link');dashboardCss.rel='stylesheet';dashboardCss.href='css/dashboard.css';document.head.appendChild(dashboardCss);showView('dashboard');renderTable();
 })();
