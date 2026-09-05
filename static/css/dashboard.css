@@ -1,0 +1,123 @@
+/* Dashboard page matching the supplied SAM EduGPT reference */
+.dashboard-mode .main-area{
+  background-color:#0b1422;
+  background-image:
+    linear-gradient(90deg,rgba(5,14,27,.08),rgba(5,14,27,.10)),
+    url('https://images.unsplash.com/photo-1711994872186-dc24d83ff99c?auto=format&fit=crop&fm=jpg&q=85&w=2400');
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
+.dashboard-mode .dashboard{
+  min-height:calc(100vh - 72px);
+  padding:36px 45px 54px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-start;
+  background:transparent;
+}
+.dashboard-mode .hero-card{
+  width:min(800px,calc(100vw - 344px));
+  min-height:690px;
+  margin:0;
+  padding:66px 64px 62px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  background:rgba(18,35,61,.80);
+  box-shadow:0 25px 65px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+.dashboard-mode .eyebrow{
+  color:#d3dce9;
+  font-size:13px;
+  letter-spacing:1.65px;
+}
+.dashboard-mode .hero-card h1{
+  margin:14px 0 23px;
+  font-size:61px;
+  line-height:1.02;
+  letter-spacing:-2.5px;
+  font-weight:800;
+}
+.dashboard-mode .typing-cursor{
+  height:58px;
+  width:3px;
+  background:#fff;
+  margin-left:6px;
+  vertical-align:-7px;
+  animation:dashboardCursor .9s steps(1) infinite;
+}
+.dashboard-mode .hero-copy{
+  margin:0 0 34px;
+  color:#dce2ec;
+  font-size:19px;
+  line-height:1.48;
+}
+.dashboard-mode .hero-actions{
+  margin-bottom:21px;
+  gap:10px;
+}
+.dashboard-mode .primary-action,
+.dashboard-mode .secondary-action{
+  height:48px;
+  border-radius:7px;
+  font-size:17px;
+}
+.dashboard-mode .primary-action{
+  background:#6677dc;
+  box-shadow:0 7px 18px rgba(102,119,220,.22);
+}
+.dashboard-mode .primary-action:hover{background:#7484e5;transform:translateY(-1px)}
+.dashboard-mode .secondary-action{
+  background:rgba(18,40,68,.74);
+  border-color:rgba(153,169,195,.55);
+}
+.dashboard-mode .secondary-action:hover{background:rgba(30,54,84,.9)}
+.dashboard-mode .promo-card,
+.dashboard-mode .evergreen-card{
+  background:rgba(64,75,96,.76);
+  border:1px solid rgba(255,255,255,.19);
+  box-shadow:0 7px 20px rgba(0,0,0,.10);
+}
+.dashboard-mode .promo-card{
+  border-left:4px solid #19bf78;
+  margin-bottom:21px;
+  padding:16px;
+}
+.dashboard-mode .promo-title span{
+  background:#6878dc;
+  padding:4px 6px;
+  border-radius:5px;
+}
+.dashboard-mode .promo-card p,
+.dashboard-mode .evergreen-card p{
+  color:#e0e4ea;
+  line-height:1.5;
+}
+.dashboard-mode .promo-card button{
+  background:#6879df;
+  transition:.15s ease;
+}
+.dashboard-mode .promo-card button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.dashboard-mode .evergreen-card{
+  border-left:4px solid #bcc2cc;
+  padding:16px;
+}
+@keyframes dashboardCursor{50%{opacity:0}}
+@media(max-width:1100px){
+  .dashboard-mode .hero-card{width:min(800px,calc(100vw - 110px))}
+}
+@media(max-width:720px){
+  .dashboard-mode .main-area{background-position:center}
+  .dashboard-mode .dashboard{padding:20px 15px 40px}
+  .dashboard-mode .hero-card{
+    width:100%;
+    min-height:0;
+    padding:38px 25px;
+    border-radius:16px;
+  }
+  .dashboard-mode .hero-card h1{font-size:42px;letter-spacing:-1.5px}
+  .dashboard-mode .hero-copy{font-size:16px}
+  .dashboard-mode .hero-actions{flex-direction:column}
+}
