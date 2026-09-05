@@ -10,6 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/dashboard.css">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 <script defer src="js/mathbank.js"></script>
 </head>
 <body class="dashboard-mode">
@@ -34,9 +41,9 @@
 <section id="dashboardView" class="view dashboard"><div class="formula-deck">
 <div class="formula-intro"><div class="eyebrow">LEARN WITH SHEN</div><h1>Formula Cards</h1><p>Quick revision cards for important Additional Mathematics formulas.</p></div>
 <div class="formula-grid">
-<article class="formula-card" tabindex="0" role="button" aria-label="Differentiation formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">DIFFERENTIATION <span>01</span></div><div class="formula-main">d/dx (xⁿ) = nxⁿ⁻¹</div><div class="formula-note">Power rule</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">DIFFERENTIATION</div><div class="back-title">Power Rule</div><p>Multiply by the power, then reduce the power by 1.</p><div class="back-example">x⁵ → 5x⁴</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
-<article class="formula-card" tabindex="0" role="button" aria-label="Integration formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">INTEGRATION <span>02</span></div><div class="formula-main">∫xⁿ dx = xⁿ⁺¹/(n+1) + C</div><div class="formula-note">For n ≠ −1</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">INTEGRATION</div><div class="back-title">Power Rule</div><p>Increase the power by 1 and divide by the new power.</p><div class="back-example">∫x² dx = x³/3 + C</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
-<article class="formula-card" tabindex="0" role="button" aria-label="Circular measure formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">CIRCULAR MEASURE <span>03</span></div><div class="formula-main">s = rθ</div><div class="formula-note">θ must be in radians</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">CIRCULAR MEASURE</div><div class="back-title">Arc Length</div><p>Use this formula when θ is measured in radians.</p><div class="back-example">s = rθ</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
+<article class="formula-card" tabindex="0" role="button" aria-label="Differentiation formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">DIFFERENTIATION <span>01</span></div><div class="formula-main">\(\displaystyle \frac{d}{dx}(x^n)=nx^{n-1}\)</div><div class="formula-note">Power rule</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">DIFFERENTIATION</div><div class="back-title">Power Rule</div><p>Multiply by the power, then reduce the power by 1.</p><div class="back-example">\(x^5 \rightarrow 5x^4\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
+<article class="formula-card" tabindex="0" role="button" aria-label="Integration formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">INTEGRATION <span>02</span></div><div class="formula-main">\(\displaystyle \int x^n\,dx=\frac{x^{n+1}}{n+1}+C\)</div><div class="formula-note">For \(n\ne-1\)</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">INTEGRATION</div><div class="back-title">Power Rule</div><p>Increase the power by 1 and divide by the new power.</p><div class="back-example">\(\displaystyle \int x^2\,dx=\frac{x^3}{3}+C\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
+<article class="formula-card" tabindex="0" role="button" aria-label="Circular measure formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">CIRCULAR MEASURE <span>03</span></div><div class="formula-main">\(\displaystyle s=r\theta\)</div><div class="formula-note">\(\theta\) must be in radians</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">CIRCULAR MEASURE</div><div class="back-title">Arc Length</div><p>Use this formula when θ is measured in radians.</p><div class="back-example">\(\displaystyle s=r\theta\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
 </div>
 <div class="formula-nav"><span>STEP-BY-STEP REVISION</span><span>03 FORMULA CARDS</span></div>
 </div></section>
