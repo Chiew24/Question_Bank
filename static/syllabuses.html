@@ -4,38 +4,69 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Syllabuses</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/app.css">
 <style>
-.syllabuses-page{min-height:100vh;padding:70px 7%;background:#f7f5ef;color:#263f3e}.syllabuses-page .heading{text-align:center;margin-bottom:55px}.syllabuses-page h1{font-size:48px;margin:0 0 12px}.syllabuses-page .intro{color:#718381;font-size:17px}.syllabus-options{max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}.syllabus-option{display:block;text-decoration:none;color:inherit;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px;padding:38px;min-height:240px;transition:.2s ease;box-shadow:0 4px 15px rgba(38,63,62,.05)}.syllabus-option:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(38,63,62,.12);border-color:#2f9c95}.syllabus-option .label{font-size:11px;font-weight:800;letter-spacing:1.3px;color:#2f9c95;margin-bottom:15px}.syllabus-option h2{font-size:27px;margin:0 0 12px}.syllabus-option p{color:#718381;line-height:1.65;margin:0}.syllabus-option .arrow{display:inline-block;margin-top:28px;font-weight:800;color:#2f9c95}.back{display:inline-block;margin-bottom:35px;color:#2f9c95;text-decoration:none;font-weight:700}@media(max-width:700px){.syllabuses-page{padding:45px 20px}.syllabuses-page h1{font-size:38px}.syllabus-options{grid-template-columns:1fr}.syllabus-option{padding:30px}}
+.syllabuses-page{min-height:100vh;padding:45px 6%;background:var(--page,#f7f5ef);color:var(--text,#263f3e)}
+.syllabuses-header{display:flex;align-items:center;gap:16px;margin-bottom:55px}
+.back-btn{border:0;background:transparent;color:#2f9c95;font-size:14px;font-weight:700;cursor:pointer;padding:8px 0}
+.syllabuses-title{flex:1;text-align:center;padding-right:80px}
+.syllabuses-title h1{margin:0 0 8px;font-size:42px;letter-spacing:-1px}
+.syllabuses-title p{margin:0;color:#718381}
+.syllabus-options{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.syllabus-option{appearance:none;width:100%;text-align:left;cursor:pointer;background:#fffdf9;border:1px solid #dce7e4;border-radius:20px;padding:38px;min-height:260px;color:#263f3e;box-shadow:0 5px 18px rgba(38,63,62,.05);transition:transform .2s,box-shadow .2s,border-color .2s}
+.syllabus-option:hover,.syllabus-option.active{transform:translateY(-5px);border-color:#2f9c95;box-shadow:0 16px 38px rgba(38,63,62,.12)}
+.option-label{font-size:11px;font-weight:800;letter-spacing:1.3px;color:#2f9c95;margin-bottom:18px}
+.syllabus-option h2{margin:0 0 12px;font-size:28px}
+.syllabus-option p{margin:0;color:#718381;line-height:1.65}
+.option-arrow{display:block;margin-top:30px;color:#2f9c95;font-weight:800}
+.panel{display:none;max-width:1050px;margin:35px auto 0;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px;padding:30px}
+.panel.active{display:block}
+.panel h2{margin:0 0 8px}
+.panel p{margin:0;color:#718381;line-height:1.6}
+@media(max-width:700px){.syllabuses-page{padding:30px 20px}.syllabuses-header{margin-bottom:35px}.syllabuses-title{padding-right:0}.syllabuses-title h1{font-size:34px}.back-btn{position:absolute}.syllabus-options{grid-template-columns:1fr}.syllabus-option{min-height:220px;padding:30px}}
 </style>
 </head>
 <body>
 <main class="syllabuses-page">
-<a class="back" href="dashboard.html">← Back to Dashboard</a>
-<header class="heading">
-<h1>Syllabuses</h1>
-<p class="intro">Choose how you want to continue.</p>
+<header class="syllabuses-header">
+<button class="back-btn" onclick="location.href='dashboard.html'">← Back</button>
+<div class="syllabuses-title"><h1>Syllabuses</h1><p>Choose how you want to continue.</p></div>
 </header>
-<section class="syllabus-options" aria-label="Syllabus options">
-<a class="syllabus-option" href="#my-syllabuses">
-<div class="label">YOUR LEARNING</div>
+
+<section class="syllabus-options">
+<button class="syllabus-option" data-panel="myPanel">
+<div class="option-label">YOUR LEARNING</div>
 <h2>My Syllabuses</h2>
 <p>View the syllabuses you have selected and continue your learning.</p>
-<span class="arrow">Open My Syllabuses →</span>
-</a>
-<a class="syllabus-option" href="#explore-syllabuses">
-<div class="label">DISCOVER</div>
+<span class="option-arrow">Open My Syllabuses →</span>
+</button>
+
+<button class="syllabus-option" data-panel="explorePanel">
+<div class="option-label">DISCOVER</div>
 <h2>Explore Syllabuses</h2>
 <p>Browse available syllabuses and discover what you can learn.</p>
-<span class="arrow">Explore Syllabuses →</span>
-</a>
+<span class="option-arrow">Explore Syllabuses →</span>
+</button>
 </section>
-<section id="my-syllabuses" style="max-width:1000px;margin:50px auto 0;padding:30px;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px">
-<h2>My Syllabuses</h2><p style="color:#718381">Your selected syllabuses will appear here.</p>
+
+<section id="myPanel" class="panel">
+<h2>My Syllabuses</h2>
+<p>Your selected syllabuses will appear here.</p>
 </section>
-<section id="explore-syllabuses" style="max-width:1000px;margin:24px auto 0;padding:30px;background:#fffdf9;border:1px solid #dce7e4;border-radius:18px">
-<h2>Explore Syllabuses</h2><p style="color:#718381">Available syllabuses will appear here.</p>
+<section id="explorePanel" class="panel">
+<h2>Explore Syllabuses</h2>
+<p>Available syllabuses will appear here.</p>
 </section>
 </main>
+<script>
+document.querySelectorAll('.syllabus-option').forEach(button=>button.addEventListener('click',()=>{
+  const panel=document.getElementById(button.dataset.panel);
+  const wasActive=panel.classList.contains('active');
+  document.querySelectorAll('.syllabus-option').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  if(!wasActive){button.classList.add('active');panel.classList.add('active');panel.scrollIntoView({behavior:'smooth',block:'start'});}
+}));
+</script>
 </body>
 </html>
