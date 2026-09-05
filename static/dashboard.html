@@ -1,89 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SAM EduGPT — Dashboard</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/dashboard.css">
-  <style>
-    html,body{height:100%;margin:0;overflow:hidden}
-    .dashboard-page{min-height:100vh;background:#07111e;color:#fff;font-family:Inter,sans-serif}
-    .dashboard-topbar{height:72px;background:#fff;color:#657080;display:flex;align-items:center;padding:0 24px;box-sizing:border-box}
-    .dashboard-menu-btn{width:40px;height:40px;border:0;border-radius:6px;background:#6474d4;color:#fff;font-size:21px;cursor:pointer}
-    .dashboard-topbar-spacer{flex:1}
-    .dashboard-theme{border:0;background:transparent;font-size:24px;color:#647080;cursor:pointer}
-    .dashboard-divider{width:1px;height:28px;background:#d7dbe1;margin:0 18px}
-    .dashboard-avatar{width:34px;height:34px;border-radius:50%;border:1px solid #777;background:#eee;display:flex;align-items:center;justify-content:center;font-size:21px;color:#777}
-    .dashboard-user{margin-left:11px;font-size:14px;font-weight:600;color:#687382}
-    .dashboard-chevron{margin-left:7px;font-size:17px}
-    .dashboard-main{position:relative;height:calc(100vh - 72px);overflow:hidden;background:#02050a}
-    .dashboard-main::before{content:"";position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(0,0,0,.12),rgba(0,0,0,.05)),url('https://images.unsplash.com/photo-1711994872186-dc24d83ff99c?auto=format&fit=crop&fm=jpg&q=85&w=2400');background-size:cover;background-position:center;filter:saturate(1.05) contrast(1.05)}
-    .dashboard-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.22))}
-    .dashboard-content{position:relative;z-index:1;padding:36px 45px}
-    .dashboard-card{width:min(800px,calc(100vw - 344px));box-sizing:border-box;padding:66px 64px 62px;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:rgba(18,35,61,.72);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 25px 65px rgba(0,0,0,.3)}
-    .dashboard-kicker{font-size:13px;font-weight:600;letter-spacing:1.65px;color:rgba(255,255,255,.75);text-transform:uppercase}
-    .dashboard-title{margin:14px 0 23px;font-size:61px;line-height:1.02;letter-spacing:-2.5px;font-weight:800;color:#fff}
-    .dashboard-title::after{content:"▍";font-size:.82em;margin-left:5px;animation:blink .9s steps(1) infinite}
-    .dashboard-subtitle{margin:0 0 34px;font-size:19px;line-height:1.48;color:rgba(255,255,255,.82);max-width:650px}
-    .dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:21px}
-    .dashboard-primary,.dashboard-secondary{height:48px;padding:0 22px;border-radius:7px;font:600 17px Inter,sans-serif;cursor:pointer}
-    .dashboard-primary{border:1px solid transparent;background:#6677dc;color:#fff;box-shadow:0 7px 18px rgba(102,119,220,.22)}
-    .dashboard-secondary{border:1px solid rgba(153,169,195,.55);background:rgba(18,40,68,.74);color:#fff}
-    .dashboard-promo,.dashboard-evergreen{padding:16px;border-radius:16px;background:rgba(64,75,96,.76);border:1px solid rgba(255,255,255,.19);box-shadow:0 7px 20px rgba(0,0,0,.1)}
-    .dashboard-promo{border-left:4px solid #19bf78;margin-bottom:21px}
-    .dashboard-evergreen{border-left:4px solid #bcc2cc}
-    .dashboard-promo-title{display:flex;align-items:center;gap:10px;font-size:18px}
-    .dashboard-pro-badge{background:#6878dc;padding:4px 7px;border-radius:5px;font-size:12px;font-weight:800}
-    .dashboard-promo p,.dashboard-evergreen p{margin:10px 0 0;color:#e0e4ea;line-height:1.5;font-size:16px}
-    .dashboard-promo button{margin-top:14px;border:0;border-radius:6px;padding:10px 17px;background:#6879df;color:#fff;font-weight:600;cursor:pointer}
-    @keyframes blink{50%{opacity:0}}
-    @media(max-width:1100px){.dashboard-card{width:min(800px,calc(100vw - 110px))}}
-    @media(max-width:720px){html,body{overflow:auto}.dashboard-main{height:auto;min-height:calc(100vh - 72px)}.dashboard-content{padding:20px 15px 40px}.dashboard-card{width:100%;padding:38px 25px}.dashboard-title{font-size:42px;letter-spacing:-1.5px}.dashboard-subtitle{font-size:16px}.dashboard-actions{flex-direction:column}.dashboard-primary,.dashboard-secondary{width:100%}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learn with Shen — Dashboard</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+<script defer src="js/mathbank.js"></script>
 </head>
 <body>
-  <div class="dashboard-page">
-    <header class="dashboard-topbar">
-      <button class="dashboard-menu-btn" aria-label="Menu">☰</button>
-      <div class="dashboard-topbar-spacer"></div>
-      <button class="dashboard-theme" aria-label="Dark mode">☾</button>
-      <span class="dashboard-divider"></span>
-      <span class="dashboard-avatar">◯</span>
-      <span class="dashboard-user">CHIEW MU SHEN</span>
-      <span class="dashboard-chevron">⌄</span>
-    </header>
-
-    <main class="dashboard-main">
-      <div class="dashboard-overlay"></div>
-      <div class="dashboard-content">
-        <section class="dashboard-card">
-          <div class="dashboard-kicker">SAM EduGPT</div>
-          <h1 class="dashboard-title">Ready to practice?</h1>
-          <p class="dashboard-subtitle">Thousands of Singapore MOE syllabus-aligned questions, powered<br class="desktop-break">by real-time AI guidance.</p>
-
-          <div class="dashboard-actions">
-            <button class="dashboard-primary" onclick="window.location.href='index.html'">◎&nbsp; Preview a question</button>
-            <button class="dashboard-secondary" onclick="window.location.href='index.html'">▥&nbsp; My syllabuses</button>
-          </div>
-
-          <div class="dashboard-promo">
-            <div class="dashboard-promo-title"><span class="dashboard-pro-badge">PRO</span><strong>Go further with Pro</strong></div>
-            <p>Unlimited AI solutions + 10× more AI usage. <strong>From S$6.58/month.</strong></p>
-            <button type="button">View Pro plans&nbsp; →</button>
-          </div>
-
-          <div class="dashboard-evergreen">
-            <strong>SAM EduGPT is an evergreen project.</strong>
-            <p>We’re constantly shipping updates—bringing you more features, expanded<br class="desktop-break">syllabuses, and a growing library of questions—so your learning experience keeps<br class="desktop-break">improving over time.</p>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
+<div id="app">
+<aside class="sidebar">
+<a class="brand" href="#dashboard"><span class="brand-symbol"><i></i><i></i><i></i></span><span><b>Learn</b> with Shen</span></a>
+<div class="profile-card"><div class="avatar">◯</div><div class="profile-name">CHIEW MU SHEN</div><div class="profile-role">Student</div><button class="settings-btn" id="accountBtn">⚙</button></div>
+<div class="nav-label">MENU</div>
+<button class="side-link" data-nav="dashboard"><span>▦</span>Dashboard</button>
+<div class="nav-label">CURRICULUM</div>
+<button class="side-link syllabus"><span>▥</span>Syllabuses</button>
+<div class="subject-menu">
+<button class="side-link child-link"><span>▢</span><em>H2 Mathematics</em><b>⌃</b></button>
+<button class="side-link nested-link" data-nav="questions"><span></span>Topics</button>
+<button class="side-link nested-link selected" data-nav="questions"><span></span>Questions</button>
+<button class="side-link nested-link"><span></span>Playground <small class="test-badge">Test</small></button>
+<button class="side-link nested-link"><span></span>Course Info</button>
+</div>
+</aside>
+<main class="main-area">
+<header class="topbar"><button class="menu-btn" id="menuBtn">☰</button><div class="top-spacer"></div><button class="theme-btn" id="themeBtn">☾</button><span class="top-divider"></span><div class="top-avatar">◯</div><span class="top-name">CHIEW MU SHEN</span><span class="top-chevron">⌄</span></header>
+<section id="dashboardView" class="view dashboard hidden"><div class="hero-card"><div class="eyebrow">LEARN WITH SHEN</div><h1>Ready to practice?<span class="typing-cursor"></span></h1><p class="hero-copy">Practice questions and learning resources designed to help you master Additional Mathematics.</p><div class="hero-actions"><button class="primary-action" id="randomBtn">◎&nbsp; Preview a question</button><button class="secondary-action" data-nav="questions">▥&nbsp; My syllabuses</button></div><div class="promo-card"><div class="promo-title"><strong>Learn with Shen</strong></div><p>Explore questions, practice by topic, and build your confidence step by step.</p><button>Explore questions&nbsp; →</button></div><div class="evergreen-card"><strong>Learn with Shen is continuously improving.</strong><p>New questions, learning resources, and improvements will be added over time to make your learning experience better.</p></div></div></section>
+<section id="questionsView" class="view content-view">
+<div class="breadcrumb"><span>Learn with Shen</span><b>›</b><span>H2 Mathematics · JC 2</span><b>›</b><span class="muted">Practice questions</span></div>
+<div class="section-label">PRACTICE QUESTIONS</div>
+<div class="question-hero"><div class="question-hero-title">▥&nbsp; H2 Mathematics · JC 2</div><div class="question-hero-subtitle">Browse filtered questions.</div><button class="all-pill">All</button></div>
+<button class="back-button" data-nav="dashboard">←&nbsp; Back to syllabus</button>
+<div class="question-panel"><div class="status-row"><span class="status-label">Status:</span><button class="status-pill active" data-status="all">All</button><button class="status-pill" data-status="not-seen">Not seen</button><button class="status-pill" data-status="seen">Seen</button></div>
+<div class="table-toolbar"><label><select id="pageSize"><option>10</option><option>25</option><option>50</option></select><span>entries per page</span></label><label class="search-box">Search:<input id="searchInput" type="search"></label></div>
+<div class="table-wrap"><table><thead><tr><th>ID <span>↕</span></th><th>QUESTION</th><th>PAPER TYPE</th><th>SOURCE</th><th>COMPONENT</th><th>SUBJECT</th><th>LEVEL</th><th>TOPICS</th><th>SUBTOPICS</th><th>STATUS <span>↕</span></th></tr></thead><tbody id="questionRows"></tbody></table></div>
+<div class="table-footer"><span id="tableInfo"></span><div class="pagination" id="pagination"></div></div></div>
+</section>
+</main>
+<div id="questionModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow dark-eyebrow">QUESTION</span><h2 id="modalTitle">Question</h2></div><button class="close-btn" data-close="questionModal">×</button></div><div id="questionDetail" class="detail-body"></div><div class="modal-actions"><button class="secondary-action" id="favoriteDetailBtn">☆ Favorite</button><button class="primary-action" data-close="questionModal">Close</button></div></div></div>
+<div id="accountModal" class="modal hidden"><div class="modal-card small-modal"><div class="modal-head"><h2>Account</h2><button class="close-btn" data-close="accountModal">×</button></div><div class="account-body"><div class="big-avatar">◯</div><h3>CHIEW MU SHEN</h3><p>Student</p><button class="primary-action" id="logoutBtn">Log out</button></div></div></div>
+</div>
 </body>
 </html>
