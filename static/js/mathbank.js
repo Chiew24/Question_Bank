@@ -40,6 +40,7 @@ document.querySelectorAll('[data-status]').forEach(b=>b.addEventListener('click'
 $('favoriteDetailBtn')?.addEventListener('click',()=>{if(!activeQuestion)return;const i=db.favorites.indexOf(activeQuestion.id);if(i<0)db.favorites.push(activeQuestion.id);else db.favorites.splice(i,1);localStorage.setItem(STORE,JSON.stringify(db));$('favoriteDetailBtn').textContent=db.favorites.includes(activeQuestion.id)?'★ Saved':'☆ Favorite'});
 $('accountBtn')?.addEventListener('click',()=>$('accountModal').classList.remove('hidden'));$('logoutBtn')?.addEventListener('click',()=>$('accountModal').classList.add('hidden'));$('menuBtn')?.addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));$('themeBtn')?.addEventListener('click',()=>document.body.classList.toggle('dark'));
 $('randomBtn')?.addEventListener('click',()=>openQuestion(questions[Math.floor(Math.random()*questions.length)].id));
+const childMenu=document.querySelector('.child-link');const subjectMenu=document.querySelector('.subject-menu');if(childMenu&&subjectMenu){childMenu.setAttribute('aria-expanded','true');childMenu.addEventListener('click',()=>{const collapsed=subjectMenu.classList.toggle('collapsed');childMenu.setAttribute('aria-expanded',String(!collapsed));const arrow=childMenu.querySelector('b');if(arrow)arrow.textContent=collapsed?'⌄':'⌃';})}
 const dashboardCss=document.createElement('link');dashboardCss.rel='stylesheet';dashboardCss.href='css/dashboard.css';document.head.appendChild(dashboardCss);
 showView('dashboard');
 renderTable();
