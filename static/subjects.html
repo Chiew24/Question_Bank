@@ -11,6 +11,10 @@
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/dashboard.css">
 <style>
+/* Keep the existing Sidebar/Header design. Only the Subjects main content is adjusted. */
+.sidebar .side-link{padding-left:12px!important;text-decoration:none!important}
+.sidebar .side-link.syllabus{font-size:15px!important;text-decoration:none!important}
+.sidebar .side-link.syllabus::after{content:none!important}
 .subjects-page{min-height:calc(100vh - 72px);padding:38px 45px 54px;display:flex;align-items:center;justify-content:center;background:transparent}
 .subjects-panel{width:min(1080px,calc(100vw - 344px));height:614px;padding:40px 42px 34px;border-radius:26px;background:rgba(247,244,236,.97);border:1px solid rgba(255,255,255,.95);box-shadow:0 26px 70px rgba(22,45,67,.20);color:#24384b;display:flex;flex-direction:column}
 .subjects-intro{text-align:center;margin-bottom:30px}
