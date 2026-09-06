@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Learn with Shen — Dashboard</title>
+<title>Learn with Shen — Overview</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,13 +22,12 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] }, svg: { fon
 <a class="brand" href="#dashboard"><span class="brand-symbol"><i></i><i></i><i></i></span><span><b>Learn</b> with Shen</span></a>
 <div class="profile-card"><div class="avatar">◯</div><div class="profile-name">CHIEW MU SHEN</div><div class="profile-role">Student</div><button class="settings-btn" id="accountBtn">⚙</button></div>
 <div class="nav-label">MENU</div>
-<button class="side-link active" data-nav="dashboard"><span>▦</span>Dashboard</button>
+<button class="side-link active" data-nav="dashboard"><span>▦</span>Overview</button>
 <div class="nav-label">CURRICULUM</div>
 <a class="side-link syllabus" href="subjects.html"><span>▥</span>Subjects</a>
 </aside>
 <main class="main-area">
-<section id="dashboardView" class="view dashboard">
-<div class="formula-deck">
+<section id="dashboardView" class="view dashboard"><div class="formula-deck">
 <div class="formula-intro"><div class="eyebrow">LEARN WITH SHEN</div><h1>Formula Cards</h1><p>Quick revision cards for important Additional Mathematics formulas.</p></div>
 <div class="formula-grid">
 <article class="formula-card" tabindex="0" role="button" aria-label="Differentiation formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">DIFFERENTIATION <span>01</span></div><div class="formula-main">\(\displaystyle \frac{d}{dx}(x^n)=nx^{n-1}\)</div><div class="formula-note">Power rule</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">DIFFERENTIATION</div><div class="back-title">Power Rule</div><p>Multiply by the power, then reduce the power by 1.</p><div class="back-example">\(x^5 \rightarrow 5x^4\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
@@ -36,21 +35,8 @@ window.MathJax = { tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] }, svg: { fon
 <article class="formula-card" tabindex="0" role="button" aria-label="Circular measure formula card. Click to flip."><div class="formula-card-inner"><div class="formula-face formula-front"><div class="formula-meta">CIRCULAR MEASURE <span>03</span></div><div class="formula-main">\(\displaystyle s=r\theta\)</div><div class="formula-note">\(\theta\) must be in radians</div><div class="flip-hint">↻ Click to flip</div></div><div class="formula-face formula-back"><div class="back-label">CIRCULAR MEASURE</div><div class="back-title">Arc Length</div><p>Use this formula when θ is measured in radians.</p><div class="back-example">\(\displaystyle s=r\theta\)</div><div class="flip-hint">↻ Click to flip back</div></div></div></article>
 </div>
 <div class="formula-nav"><span>STEP-BY-STEP REVISION</span><span>03 FORMULA CARDS</span></div>
-</div>
-</section>
-<section id="questionsView" class="view content-view hidden">
-<div class="breadcrumb"><span>Learn with Shen</span><b>›</b><span class="muted">Practice questions</span></div>
-<div class="section-label">PRACTICE QUESTIONS</div>
-<div class="question-hero"><div class="question-hero-title">▥&nbsp; Mathematics</div><div class="question-hero-subtitle">Browse filtered questions.</div><button class="all-pill">All</button></div>
-<button class="back-button" data-nav="dashboard">←&nbsp; Back</button>
-<div class="question-panel"><div class="status-row"><span class="status-label">Status:</span><button class="status-pill active" data-status="all">All</button><button class="status-pill" data-status="not-seen">Not seen</button><button class="status-pill" data-status="seen">Seen</button></div>
-<div class="table-toolbar"><label><select id="pageSize"><option>10</option><option>25</option><option>50</option></select><span>entries per page</span></label><label class="search-box">Search:<input id="searchInput" type="search"></label></div>
-<div class="table-wrap"><table><thead><tr><th>ID <span>↕</span></th><th>QUESTION</th><th>PAPER TYPE</th><th>SOURCE</th><th>COMPONENT</th><th>SUBJECT</th><th>LEVEL</th><th>TOPICS</th><th>SUBTOPICS</th><th>STATUS <span>↕</span></th></tr></thead><tbody id="questionRows"></tbody></table></div>
-<div class="table-footer"><span id="tableInfo"></span><div class="pagination" id="pagination"></div></div></div>
-</section>
+</div></section>
 </main>
-<div id="questionModal" class="modal hidden"><div class="modal-card"><div class="modal-head"><div><span class="eyebrow dark-eyebrow">QUESTION</span><h2 id="modalTitle">Question</h2></div><button class="close-btn" data-close="questionModal">×</button></div><div id="questionDetail" class="detail-body"></div><div class="modal-actions"><button class="secondary-action" id="favoriteDetailBtn">☆ Favorite</button><button class="primary-action" data-close="questionModal">Close</button></div></div></div>
-<div id="accountModal" class="modal hidden"><div class="modal-card small-modal"><div class="modal-head"><h2>Account</h2><button class="close-btn" data-close="accountModal">×</button></div><div class="account-body"><div class="big-avatar">◯</div><h3>CHIEW MU SHEN</h3><p>Student</p><button class="primary-action" id="logoutBtn">Log out</button></div></div></div>
 </div>
 <script>
 document.querySelectorAll('.formula-card').forEach(card => {
