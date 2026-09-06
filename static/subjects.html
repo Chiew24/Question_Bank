@@ -11,8 +11,8 @@
 <link rel="stylesheet" href="css/app.css">
 <link rel="stylesheet" href="css/dashboard.css">
 <style>
-.subjects-page{min-height:calc(100vh - 72px);padding:38px 45px 54px;display:flex;align-items:flex-start;justify-content:center;background:transparent}
-.subjects-panel{width:min(1080px,calc(100vw - 344px));padding:40px 42px 34px;border-radius:26px;background:rgba(247,244,236,.97);border:1px solid rgba(255,255,255,.95);box-shadow:0 26px 70px rgba(22,45,67,.20);color:#24384b}
+.subjects-page{min-height:calc(100vh - 72px);padding:38px 45px 54px;display:flex;align-items:center;justify-content:center;background:transparent}
+.subjects-panel{width:min(1080px,calc(100vw - 344px));height:614px;padding:40px 42px 34px;border-radius:26px;background:rgba(247,244,236,.97);border:1px solid rgba(255,255,255,.95);box-shadow:0 26px 70px rgba(22,45,67,.20);color:#24384b;display:flex;flex-direction:column}
 .subjects-intro{text-align:center;margin-bottom:30px}
 .subjects-intro .eyebrow{color:#55718b;font-size:12px;letter-spacing:2px;font-weight:800}
 .subjects-intro h1{margin:8px 0 6px;font-family:Georgia,'Times New Roman',serif;font-size:44px;line-height:1.05;letter-spacing:-1px;color:#26384a}
@@ -25,9 +25,9 @@
 .subject-description{margin:0;color:#657789;font-size:14px;line-height:1.6}
 .subject-arrow{width:46px;height:46px;flex:0 0 46px;border-radius:50%;display:grid;place-items:center;background:#6575d8;color:#fff;font-size:22px;transition:transform .2s ease}
 .subject-card:hover .subject-arrow{transform:translateX(4px)}
-.subjects-footer{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:17px;border-top:1px solid #ddd8cc;color:#71808d;font-size:10px;font-weight:800;letter-spacing:1.2px}
+.subjects-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:17px;border-top:1px solid #ddd8cc;color:#71808d;font-size:10px;font-weight:800;letter-spacing:1.2px}
 @media(max-width:1100px){.subjects-panel{width:min(960px,calc(100vw - 110px))}}
-@media(max-width:720px){.subjects-page{padding:20px 15px 40px}.subjects-panel{width:100%;padding:30px 16px 24px;border-radius:18px}.subjects-intro h1{font-size:37px}.subjects-intro p{font-size:14px}.subject-card{padding:24px 20px}.subject-title{font-size:22px}.subjects-footer{font-size:9px}}
+@media(max-width:720px){.subjects-page{padding:20px 15px 40px;align-items:flex-start}.subjects-panel{width:100%;height:auto;min-height:520px;padding:30px 16px 24px;border-radius:18px}.subjects-intro h1{font-size:37px}.subjects-intro p{font-size:14px}.subject-card{padding:24px 20px}.subject-title{font-size:22px}.subjects-footer{font-size:9px}}
 </style>
 </head>
 <body class="dashboard-mode">
